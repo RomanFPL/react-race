@@ -3,6 +3,7 @@ import Header from "../header";
 import Layout from "../layout";
 import Footer from "../footer";
 
+
 import imgBG from "../../assets/bg.jpg"
 import jucyBG from "../../assets/bg1.jpg"
 
