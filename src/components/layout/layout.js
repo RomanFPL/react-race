@@ -1,15 +1,15 @@
-// import layout from "./layout.css"
+import s from "./layout.module.css"
 
 const Layout = ({title, descr, urlBg, colorBg}) => {
     return (
-        <section className="root">
-            <div className="wrapper">
+        <section className={s.root}>
+            <div className={s.wrapper}>
                 <article>
-                    <div className="title">
+                    <div className={s.title}>
                         <h3>{title}</h3>
-                        <span className="separator"></span>
+                        <span className={s.separator}></span>
                     </div>
-                    <div className="desc full">
+                    <div className={`${s.desc} ${s.full}`}>
                         <p>{descr}</p>
                     </div>
                 </article>

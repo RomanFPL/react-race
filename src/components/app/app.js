@@ -7,9 +7,9 @@ const App = () => {
     return (
         <>
             <Header title={"Title"} descr={"Description"}/>
-            <Layout title={"title"} descr={"description"} urlBg={"sdjbjdskb"} colorBg={"jdbkdbsjd"}/>
-            <Layout title={"title"} descr={"description"} urlBg={"sdjbjdskb"} colorBg={"jdbkdbsjd"}/>
-            <Layout title={"title"} descr={"description"} urlBg={"sdjbjdskb"} colorBg={"jdbkdbsjd"}/>
+            <Layout title={"Test title #1"} descr={"Description"} urlBg={""} colorBg={""}/>
+            <Layout title={"Test title #2"} descr={"Description"} urlBg={""} colorBg={""}/>
+            <Layout title={"Test title #3"} descr={"Description"} urlBg={""} colorBg={""}/>
             <Footer/>
         </>
     )
