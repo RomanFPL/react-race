@@ -1,3 +1,5 @@
+// import layout from "./layout.css"
+
 const Layout = () => {
     return (
         <section className="root">
