@@ -1,8 +1,9 @@
 import React from "react"
+import Header from "../header/header"
 
 const App = () => {
     return (
-        <h1>Hello</h1>
+        <Header title={"Title"} descr={"Description"}/>
     )
 }
 
