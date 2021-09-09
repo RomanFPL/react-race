@@ -1,8 +1,11 @@
 import s from "./layout.module.css"
 
 const Layout = ({title, descr, urlBg, colorBg}) => {
+
+    const sectionStyle = urlBg ? {background: `url(${urlBg})`} : {background: colorBg}
+    
     return (
-        <section className={s.root}>
+        <section className={s.root} style={sectionStyle}>
             <div className={s.wrapper}>
                 <article>
                     <div className={s.title}>
