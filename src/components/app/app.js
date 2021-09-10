@@ -3,6 +3,7 @@ import Header from "../header";
 import Layout from "../layout";
 import PokemonCard from "../pokemonCard";
 import Footer from "../footer";
+import "./app.css"
 
 
 import imgBG from "../../assets/bg.jpg"
@@ -152,7 +153,9 @@ const App = () => {
                 <p>Each player has five cards in a hand and the aim is to capture the opponent's cards by turning them into the player's own color of red or blue.</p>
             </Layout>
             <Layout title={"Test title #2"} colorBg={"#78c594"}>
-                {POKEMONS.map(card => <PokemonCard key={card.id} type={card.type} values={card.values} img={card.img} name={card.name} id={card.id} cardBG={cardBG}/>)}
+                <div className="flex">
+                    {POKEMONS.map(card => <PokemonCard key={card.id} type={card.type} values={card.values} img={card.img} name={card.name} id={card.id} cardBG={cardBG}/>)}
+                </div>
             </Layout>
             <Layout title={"Full rules description"} urlBg={jucyBG}>
                 <p> In the game two players face off against one another, one side playing as "blue", the other as "red" on a 3x3 grid.</p>
