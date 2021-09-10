@@ -7,6 +7,7 @@ import Footer from "../footer";
 
 import imgBG from "../../assets/bg.jpg"
 import jucyBG from "../../assets/bg1.jpg"
+const cardBG = "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/0a722b8b-d83c-42ff-9044-2019adf1ff3b/card-back-side.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210910T165053Z&X-Amz-Expires=86400&X-Amz-Signature=54726084f5af78df5816ed6d7edeb3338622716affa792d49477e9957cd2b85a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22card-back-side.jpg%22"
 
 
 const POKEMONS = [
@@ -151,7 +152,7 @@ const App = () => {
                 <p>Each player has five cards in a hand and the aim is to capture the opponent's cards by turning them into the player's own color of red or blue.</p>
             </Layout>
             <Layout title={"Test title #2"} colorBg={"#78c594"}>
-
+                {POKEMONS.map(card => <PokemonCard key={card.id} type={card.type} values={card.values} img={card.img} name={card.name} id={card.id} cardBG={cardBG}/>)}
             </Layout>
             <Layout title={"Full rules description"} urlBg={jucyBG}>
                 <p> In the game two players face off against one another, one side playing as "blue", the other as "red" on a 3x3 grid.</p>
