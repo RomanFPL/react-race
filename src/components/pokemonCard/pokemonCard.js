@@ -1,10 +1,17 @@
 import s from "./pokemonCard.module.css"
+import { useState } from "react";
 
 const PokemonCard = ({type, values, img, name, id, cardBG}) => {
+    const [isActive, setActive] = useState(false);
     const {top, right, bottom, left} = values;
+
+    const hendleClick = () => {
+        isActive ? setActive(false) : setActive(true);
+    }
+    
     return (
-        <div className={s.root}>
-            <div className={s.pokemonCard}>
+        <div className={s.root} onClick={hendleClick}>
+            <div className={`${s.pokemonCard} ${isActive ? s.active : ""}`}>
                 <div className={s.cardFront}>
                     <div className={`${s.wrap} ${s.front}`}>
                         <div className={`${s.pokemon} ${type}`}>

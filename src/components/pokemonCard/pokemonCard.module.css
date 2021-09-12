@@ -3,6 +3,7 @@
     height: 388px;
     margin: 16px;
     perspective: 1000px;
+    cursor: pointer;
 }
 
 .pokemonCard {
@@ -30,7 +31,7 @@
 }
 
 /* TODO: This place where we should change :hover on .active */
-.pokemonCard:hover {
+.pokemonCard.active {
     transform: rotateY(0deg);
 }
 
