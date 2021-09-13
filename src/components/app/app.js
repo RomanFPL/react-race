@@ -1,4 +1,5 @@
 import React from "react"
+
 import Header from "../header";
 import Layout from "../layout";
 import PokemonCard from "../pokemonCard";
