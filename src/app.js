@@ -5,8 +5,8 @@ import HomePage from "./routes/home";
 const App = () => {
   const [page, setPage] = useState("app");
 
-  const handleChangePanel = () => {
-    console.log("Page")
+  const handleChangePanel = (page) => {
+    setPage(page);
   }
 
   switch (page) {

@@ -146,9 +146,8 @@ const POKEMONS = [
     }}];
 
 const HomePage = ({changePageState}) => {
-  const handleClickButton = () => {
-    console.log("Home");
-    changePageState && changePageState();
+  const handleClickButton = (page) => {
+    changePageState && changePageState(page);
   }
     return (
         <>
