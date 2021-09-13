@@ -1,15 +1,15 @@
 import React from "react"
 
-import Header from "../header";
-import Layout from "../layout";
-import PokemonCard from "../pokemonCard";
-import Footer from "../footer";
+import Header from "./components/header";
+import Layout from "./components/layout";
+import PokemonCard from "./components/pokemonCard";
+import Footer from "./components/footer";
 import "./app.css"
 
 
-import imgBG from "../../assets/bg.jpg"
-import jucyBG from "../../assets/bg1.jpg"
-import cardBG from "../../assets/cardBack.jpg"
+import imgBG from "./assets/bg.jpg"
+import jucyBG from "./assets/bg1.jpg"
+import cardBG from "./assets/cardBack.jpg"
 
 
 const POKEMONS = [
