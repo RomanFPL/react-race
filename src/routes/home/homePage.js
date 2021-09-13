@@ -1,15 +1,15 @@
 import React from "react"
 
-import Header from "./components/header";
-import Layout from "./components/layout";
-import PokemonCard from "./components/pokemonCard";
-import Footer from "./components/footer";
-import "./app.css"
+import Header from "../../components/header";
+import Layout from "../../components/layout";
+import PokemonCard from "../../components/pokemonCard";
+import Footer from "../../components/footer";
+import "./style.css"
 
 
-import imgBG from "./assets/bg.jpg"
-import jucyBG from "./assets/bg1.jpg"
-import cardBG from "./assets/cardBack.jpg"
+import imgBG from "../../assets/bg.jpg"
+import jucyBG from "../../assets/bg1.jpg"
+import cardBG from "../../assets/cardBack.jpg"
 
 
 const POKEMONS = [
@@ -145,10 +145,14 @@ const POKEMONS = [
       "left": 4
     }}];
 
-const App = () => {
+const HomePage = ({changePageState}) => {
+  const handleClickButton = () => {
+    console.log("Home");
+    changePageState && changePageState();
+  }
     return (
         <>
-            <Header title={"Pokemon game"} descr={"Description will appear as soon as posible..."}/>
+            <Header title={"Pokemon game"} descr={"Description will appear as soon as posible..."} onClickButton={handleClickButton}/>
             <Layout title={"Rules"} descr={"Description"} urlBg={imgBG}>
                 <p>In the game two players face off against one another, one side playing as "blue", the other as "red" on a 3x3 grid.</p>
                 <p>Each player has five cards in a hand and the aim is to capture the opponent's cards by turning them into the player's own color of red or blue.</p>
@@ -168,4 +172,4 @@ const App = () => {
     )
 }
 
-export default App;
+export default HomePage;
