@@ -13,7 +13,7 @@ const App = () => {
     case "app":
       return <HomePage changePageState={handleChangePanel}/>
     case "game": 
-      return <GamePage/>
+      return <GamePage changePageState={handleChangePanel}/>
     default:
       return <HomePage/>
   }
