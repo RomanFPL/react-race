@@ -10,6 +10,7 @@ import "./style.css"
 import imgBG from "../../assets/bg.jpg"
 import jucyBG from "../../assets/bg1.jpg"
 import cardBG from "../../assets/cardBack.jpg"
+import MenuHeader from "../../components/menuHeader";
 
 
 const POKEMONS = [
@@ -151,6 +152,7 @@ const HomePage = ({changePageState}) => {
   }
     return (
         <>
+            <MenuHeader/>
             <Header title={"Pokemon game"} descr={"Description will appear as soon as posible..."} onClickButton={handleClickButton}/>
             <Layout title={"Rules"} descr={"Description"} urlBg={imgBG}>
                 <p>In the game two players face off against one another, one side playing as "blue", the other as "red" on a 3x3 grid.</p>
