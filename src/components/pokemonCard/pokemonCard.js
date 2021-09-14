@@ -1,5 +1,6 @@
 import s from "./pokemonCard.module.css"
 import { useState } from "react";
+import cn from "classnames";
 
 const PokemonCard = ({type, values, img, name, id, cardBG}) => {
     const [isActive, setActive] = useState(false);
@@ -11,15 +12,15 @@ const PokemonCard = ({type, values, img, name, id, cardBG}) => {
     
     return (
         <div className={s.root} onClick={hendleClick}>
-            <div className={`${s.pokemonCard} ${isActive ? s.active : ""}`}>
+            <div className={cn(s.pokemonCard, {[s.active] : isActive})}>
                 <div className={s.cardFront}>
-                    <div className={`${s.wrap} ${s.front}`}>
-                        <div className={`${s.pokemon} ${type}`}>
+                    <div className={cn(s.wrap, s.front)}>
+                        <div className={cn(s.pokemon, s.type)}>
                             <div className={s.values}>
-                                <div className={`${s.count} ${s.top}`}>{top}</div>
-                                <div className={`${s.count} ${s.right}`} >{right}</div>
-                                <div className={`${s.count} ${s.bottom}`} >{bottom}</div>
-                                <div className={`${s.count} ${s.left}`} >{left}</div>
+                                <div className={cn(s.count, s.top)}>{top}</div>
+                                <div className={cn(s.count, s.right)} >{right}</div>
+                                <div className={cn(s.count, s.bottom)} >{bottom}</div>
+                                <div className={cn(s.count, s.left)} >{left}</div>
                             </div>
                             <div className={s.imgContainer}>
                                 <img src={img} alt={name} />
