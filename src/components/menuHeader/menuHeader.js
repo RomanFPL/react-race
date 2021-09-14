@@ -10,8 +10,8 @@ const MenuHeader = () => {
 
     return(
         <>
-            <Menu menuActive={menuState} menuTriger={toggleMenuActive}/>
-            <NavBar menuActive={menuState}/>
+            <NavBar menuActive={menuState} menuTriger={toggleMenuActive}/>
+            <Menu menuActive={menuState}/>
        </> 
     )
 }
