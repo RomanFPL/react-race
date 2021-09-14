@@ -1,9 +1,9 @@
 import cn from "classnames"
 import s from "./menu.module.css"
 
-const Menu = ({handleClickMenu}) => {
+const Menu = ({menuActive}) => {
     return(
-    <div className={cn(s.menuContainer, {[s.active]: false}, {[s.deactive]: false})}>
+    <div className={cn(s.menuContainer, {[s.active]: menuActive}, {[s.deactive]: !menuActive})}>
         <div className={s.overlay}/>
         <div className={s.menuItems}>
             <ul>

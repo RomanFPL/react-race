@@ -1,11 +1,10 @@
 import cn from "classnames";
 import s from "./navBar.module.css";
-import {useState} from "react";
 
-const NavBar = () => {
-    const [state, setState] = useState(false);
+const NavBar = ({menuActive, menuTriger}) => {
     const toggleMenuIcon = () => {
-        setState(!state);
+        menuTriger && menuTriger();
+        console.log(menuActive);
     }
     return (
         <nav className={s.root}>
@@ -13,7 +12,7 @@ const NavBar = () => {
             <p className={s.brand}>
             LOGO
             </p>
-            <a onClick={toggleMenuIcon} className={cn(s.menuButton, {[s.active] : state})}>
+            <a onClick={toggleMenuIcon} className={cn(s.menuButton, {[s.active] : menuActive})}>
             <span />
             </a>
         </div>
