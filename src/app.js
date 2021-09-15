@@ -1,6 +1,6 @@
 import { useState } from "react";
-import GamePage from "./routes/game";
-import HomePage from "./routes/home";
+import GamePage from "./routes/gamePage";
+import HomePage from "./routes/homePage";
 import "./app.css"
 
 const App = () => {
