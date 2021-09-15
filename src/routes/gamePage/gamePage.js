@@ -1,12 +1,15 @@
+import MenuHeader from "../../components/menuHeader";
+
 const GamePage = ({changePageState}) => {
     const handleClickButton = () => {
         changePageState && changePageState("app")
     }
     return (
-        <div>
-            This is Game Page!!!
-            <button onClick={handleClickButton}>Go back</button>
-        </div>
+            <div>
+                <MenuHeader bgActive="true"/>
+                    <section style={{padding: "75px"}}>This is Game Page!!!</section>
+                    <button onClick={handleClickButton}>Go back</button>
+            </div>
     )
 }
 export default GamePage;
