@@ -3,15 +3,15 @@ import NavBar from "../navBar"
 import { useState } from "react"
 
 const MenuHeader = () => {
-    const [menuState, setMenu] = useState(false);
+    const [menuState, setMenu] = useState(null);
     const toggleMenuActive = () => {
         setMenu(!menuState);
     }
 
     return(
         <>
-            <NavBar menuActive={menuState} menuTriger={toggleMenuActive}/>
             <Menu menuActive={menuState}/>
+            <NavBar menuActive={menuState} menuTriger={toggleMenuActive}/>
        </> 
     )
 }
