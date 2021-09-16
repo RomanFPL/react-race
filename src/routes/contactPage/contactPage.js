@@ -1,11 +1,7 @@
-const ContactPage = ({changePageState}) => {
-    const handleClickButton = () => {
-        changePageState && changePageState("app")
-    }
+const ContactPage = () => {
     return (
             <div>
-                <section style={{padding: "75px"}}>This is Contact Page!!!</section>
-                <button onClick={handleClickButton}>Go back</button>
+                <section>This is Contact Page!!!</section>
             </div>
     )
 }

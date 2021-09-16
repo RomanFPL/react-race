@@ -7,7 +7,7 @@ const GamePage = () => {
     }
     return (
             <div>
-                <section style={{padding: "75px"}}>This is Game Page!!!</section>
+                <section>This is Game Page!!!</section>
                 <button onClick={handleClickButton}>Go back</button>
             </div>
     )
