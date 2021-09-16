@@ -144,26 +144,11 @@ const GamePage = () => {
         hist.push("/")
     }
 
-    // POKEMONS.map(x => {
-    //     if(x.id === 4){
-    //         return x.active ? x.active = true : x.active = !x.active
-    //     } else {
-    //         return x.active = true
-    //     }});
-
-    console.log(POKEMONS)
-
     const [cards, setPokemons] = useState(POKEMONS);
 
     const handleCardClick = (id) => {
-        console.log(id);
-        // const tempArr = POKEMONS.map(x => {
-        // if(x.id === id){
-        //     return x.active ? x.active = true : x.active = !x.active
-        // } else {
-        //     return x.active = true
-        // }});
-        // setPokemons(tempArr);
+        POKEMONS.map(x => x.id === id ? x.active = true : null);
+        setPokemons([...POKEMONS]);
     }
 
     return (
