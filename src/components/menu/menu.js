@@ -1,23 +1,24 @@
 import cn from "classnames"
 import s from "./menu.module.css"
+import { Link } from "react-router-dom"
 
 
 const MENU = [
     {
         title: "HOME",
-        to: "#welcome"
+        to: "/"
     },
     {
         title: "GAME",
-        to: "#game"
+        to: "game"
     },
     {
         title: "ABOUT",
-        to: "#about"
+        to: "about"
     },
     {
         title: "CONTACT",
-        to: "#contact"
+        to: "contact"
     },
 ]
 
@@ -32,9 +33,9 @@ const Menu = ({menuActive}) => {
             <ul>
             {MENU.map((elem, i) => (
                 <li key={i}>
-                    <a href={elem.to}>
+                    <Link to={elem.to}>
                     {elem.title}
-                    </a>
+                    </Link>
                 </li>
             ))}
             </ul>

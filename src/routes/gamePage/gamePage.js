@@ -1,6 +1,9 @@
-const GamePage = ({changePageState}) => {
+import { useHistory } from "react-router";
+
+const GamePage = () => {
+    const hist = useHistory()
     const handleClickButton = () => {
-        changePageState && changePageState("app")
+        hist.push("/")
     }
     return (
             <div>
