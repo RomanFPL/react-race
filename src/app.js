@@ -1,7 +1,7 @@
 import GamePage from "./routes/gamePage";
 import HomePage from "./routes/homePage";
 import ContactPage from "./routes/contactPage";
-import { useRouteMatch, Route, Switch } from "react-router-dom";
+import { useRouteMatch, Route, Switch, Redirect } from "react-router-dom";
 import AboutPage from "./routes/aboutPage/aboutPage";
 
 import s from "./app.module.css"
@@ -13,6 +13,7 @@ const App = () => {
   const match = useRouteMatch("/");
   return (
       <Switch>
+        <Route path="/404" render={() => <h1>404 NotFound</h1>}/>
         <Route>
           <>
             <MenuHeader bgActive={!match.isExact}/>
@@ -23,12 +24,12 @@ const App = () => {
                   <Route path="/game" component={GamePage}/>
                   <Route path="/about" component={AboutPage}/>
                   <Route path="/contact" component={ContactPage}/>
+                  <Route render={() => (<Redirect to="/404"/>)}/>
                 </Switch>
               </div>
             <Footer/>
           </> 
         </Route>
-        <Route render={() => <h1>404 NotFound</h1>}/>
       </Switch>
   )
 //   const [page, setPage] = useState("app");
