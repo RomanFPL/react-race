@@ -2,8 +2,8 @@ import s from "./pokemonCard.module.css"
 import { useState } from "react";
 import cn from "classnames";
 
-const PokemonCard = ({type, values, img, name, id, cardBG}) => {
-    const [isActive, setActive] = useState(false);
+const PokemonCard = ({type, values, img, name, id, cardBG, active}) => {
+    const [isActive, setActive] = useState(active);
     const {top, right, bottom, left} = values;
 
     const hendleClick = () => {

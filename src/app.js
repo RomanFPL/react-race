@@ -32,20 +32,6 @@ const App = () => {
         </Route>
       </Switch>
   )
-//   const [page, setPage] = useState("app");
-
-//   const handleChangePanel = (page) => {
-//     setPage(page);
-//   }
-
-//   switch (page) {
-//     case "app":
-//       return <HomePage changePageState={handleChangePanel}/>
-//     case "game": 
-//       return <GamePage changePageState={handleChangePanel}/>
-//     default:
-//       return <HomePage/>
-//   }
 }
 
 export default App;
