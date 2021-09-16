@@ -144,14 +144,34 @@ const GamePage = () => {
         hist.push("/")
     }
 
-    const [pokemonsArr, setPokemons] = useState(POKEMONS);
+    // POKEMONS.map(x => {
+    //     if(x.id === 4){
+    //         return x.active ? x.active = true : x.active = !x.active
+    //     } else {
+    //         return x.active = true
+    //     }});
+
+    console.log(POKEMONS)
+
+    const [cards, setPokemons] = useState(POKEMONS);
+
+    const handleCardClick = (id) => {
+        console.log(id);
+        // const tempArr = POKEMONS.map(x => {
+        // if(x.id === id){
+        //     return x.active ? x.active = true : x.active = !x.active
+        // } else {
+        //     return x.active = true
+        // }});
+        // setPokemons(tempArr);
+    }
 
     return (
             <div>
                 <h1>This is Game Page!!!</h1>
                 <section>
                     <div className="flex">
-                        {POKEMONS.map(card => <PokemonCard key={card.id} type={card.type} values={card.values} img={card.img} name={card.name} id={card.id} cardBG={cardBG} active={true}/>)}
+                        {cards.map(card => <PokemonCard key={card.id} type={card.type} values={card.values} img={card.img} name={card.name} id={card.id} cardBG={cardBG} active={card.active === true} handleCardClick={handleCardClick}/>)}
                     </div>
                 </section>
                 <button onClick={handleClickButton}>Go back</button>
