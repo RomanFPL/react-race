@@ -18,6 +18,8 @@ const GamePage = () => {
         setPokemons(newCrads);
     }
 
+    console.log(POKEMONS);
+
     return (
             <div>
                 <h1>This is Game Page!!!</h1>
