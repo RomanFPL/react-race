@@ -22,7 +22,7 @@ const MENU = [
     },
 ]
 
-const Menu = ({menuActive}) => {
+const Menu = ({menuActive, menuTriger}) => {
     return(
     <div className={cn(s.menuContainer, 
             {[s.active]: menuActive === true}, 
@@ -32,7 +32,7 @@ const Menu = ({menuActive}) => {
         <div className={s.menuItems}>
             <ul>
             {MENU.map((elem, i) => (
-                <li key={i}>
+                <li key={i} onClick={menuTriger}>
                     <Link to={elem.to}>
                     {elem.title}
                     </Link>
