@@ -1,25 +1,35 @@
-// import { useState } from "react";
-
 import GamePage from "./routes/gamePage";
 import HomePage from "./routes/homePage";
 import ContactPage from "./routes/contactPage";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useRouteMatch, Route, Switch } from "react-router-dom";
 import AboutPage from "./routes/aboutPage/aboutPage";
 
-import "./app.css"
+import s from "./app.module.css"
+import cn from "classnames";
+import Footer from "./components/footer";
+import MenuHeader from "./components/menuHeader";
 
 const App = () => {
+  const match = useRouteMatch("/");
   return (
-    <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/home" component={HomePage}/>
-        <Route path="/game" component={GamePage}/>
-        <Route path="/about" component={AboutPage}/>
-        <Route path="/contact" component={ContactPage}/>
+        <Route>
+          <>
+            <MenuHeader bgActive={!match.isExact}/>
+              <div className={cn(s.wrap, {[s.isHomePage]:match.isExact})}>
+                <Switch>
+                  <Route path="/" exact component={HomePage}/>
+                  <Route path="/home" component={HomePage}/>
+                  <Route path="/game" component={GamePage}/>
+                  <Route path="/about" component={AboutPage}/>
+                  <Route path="/contact" component={ContactPage}/>
+                </Switch>
+              </div>
+            <Footer/>
+          </> 
+        </Route>
         <Route render={() => <h1>404 NotFound</h1>}/>
       </Switch>
-    </BrowserRouter>
   )
 //   const [page, setPage] = useState("app");
 
