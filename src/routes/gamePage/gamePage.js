@@ -7,6 +7,34 @@ import cardBG from "../../assets/cardBack.jpg"
 
 import database from "../../services/firebase";
 
+const newPokemon = {
+    "abilities": [
+        "blaze",
+        "solar-power"
+      ],
+      "base_experience": 62,
+      "height": 6,
+      "weight": 85,
+      "id": 4,
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+      "name": "charmander",
+      "stats": {
+        "hp": 39,
+        "attack": 52,
+        "defense": 43,
+        "special-attack": 60,
+        "special-defense": 50,
+        "speed": 65
+      },
+      "type": "fire",
+      "values": {
+        "top": 1,
+        "right": 1,
+        "bottom": 2,
+        "left": 1
+      }
+}
+
 const GamePage = () => {
 
     const hist = useHistory();
@@ -24,11 +52,21 @@ const GamePage = () => {
             "active": true,
         });          
     }
-    
-    useEffect(() => {
-        database.ref("pokemons").once("value", (snapshot) => {
+
+    const addNewCard = async () => {
+        const newKey = database.ref().child('pokemons').push().key;
+        await database.ref('pokemons/' + newKey).set(newPokemon);
+        pokemonsAsState();
+    }
+
+    const pokemonsAsState = async () => {
+        await database.ref("pokemons").once("value", (snapshot) => {
             setPokemons(snapshot.val());
         })
+    }
+    
+    useEffect(() => {
+        pokemonsAsState();
     }, []);
 
     const handleCardClick = (id) => {
@@ -65,7 +103,7 @@ const GamePage = () => {
             <div>
                 <h1>This is Game Page!!!</h1>
                 <section>
-                <button className={s.btnCenter} onClick={handleClickButton}>Add new pokemon</button>
+                <button className={s.btnCenter} onClick={addNewCard}>Add new pokemon</button>
                     <div className="flex">
                         {Object.entries(cards).map(([key, {id, type, values, img, name, active}]) => 
                         <PokemonCard 
