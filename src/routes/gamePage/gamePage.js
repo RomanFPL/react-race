@@ -3,7 +3,6 @@ import PokemonCard from "../../components/pokemonCard";
 import { useState, useEffect } from "react";
 
 import cardBG from "../../assets/cardBack.jpg"
-import POKEMONS from "../../assets/pokemons";
 
 import database from "../../services/firebase";
 
@@ -46,16 +45,16 @@ const GamePage = () => {
                 <h1>This is Game Page!!!</h1>
                 <section>
                     <div className="flex">
-                        {Object.entries(cards).map(([key, card]) => 
+                        {Object.entries(cards).map(([key, {id, type, values, img, name, active}]) => 
                         <PokemonCard 
-                            key={card.id} 
-                            type={card.type} 
-                            values={card.values} 
-                            img={card.img} 
-                            name={card.name} 
-                            id={card.id} 
+                            key={id} 
+                            type={type} 
+                            values={values} 
+                            img={img} 
+                            name={name} 
+                            id={id} 
                             cardBG={cardBG} 
-                            active={card.active === true} 
+                            active={active === true} 
                             handleCardClick={handleCardClick}/>)}
                     </div>
                 </section>
