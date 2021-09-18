@@ -2,7 +2,6 @@ import s from "./pokemonCard.module.css"
 import cn from "classnames";
 
 const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardClick}) => {
-    console.log(active)
     const {top, right, bottom, left} = values;
     
     return (

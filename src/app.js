@@ -9,12 +9,6 @@ import cn from "classnames";
 import Footer from "./components/footer";
 import MenuHeader from "./components/menuHeader";
 
-import database from "./services/firebase";
-
-  database.ref("pokemons").on("value", (snapshot) => {
-    console.log(snapshot.val())
-  })
-
 const App = () => {
   const match = useRouteMatch("/");
   return (
