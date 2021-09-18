@@ -18,7 +18,13 @@ const GamePage = () => {
         hist.push("/")
     }
 
-    const [cards, setPokemons] = useState(POKEMONS);
+    const [cards, setPokemons] = useState({});
+
+    useEffect(() => {
+        database.ref("pokemons").once("value", (snapshot) => {
+            setPokemons(snapshot.val());
+        })
+    }, []);
 
     const handleCardClick = (id) => {
         setPokemons(prevState => {
@@ -40,7 +46,7 @@ const GamePage = () => {
                 <h1>This is Game Page!!!</h1>
                 <section>
                     <div className="flex">
-                        {cards.map(card => 
+                        {Object.entries(cards).map(([key, card]) => 
                         <PokemonCard 
                             key={card.id} 
                             type={card.type} 
