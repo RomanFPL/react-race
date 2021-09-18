@@ -1,6 +1,7 @@
 import { useHistory } from "react-router";
 import PokemonCard from "../../components/pokemonCard";
 import { useState, useEffect } from "react";
+import s from "./style.module.css"
 
 import cardBG from "../../assets/cardBack.jpg"
 
@@ -64,6 +65,7 @@ const GamePage = () => {
             <div>
                 <h1>This is Game Page!!!</h1>
                 <section>
+                <button className={s.btnCenter} onClick={handleClickButton}>Add new pokemon</button>
                     <div className="flex">
                         {Object.entries(cards).map(([key, {id, type, values, img, name, active}]) => 
                         <PokemonCard 
@@ -78,7 +80,7 @@ const GamePage = () => {
                             handleCardClick={handleCardClick}/>)}
                     </div>
                 </section>
-                <button onClick={handleClickButton}>Go back</button>
+                <button className={s.btnCenter} onClick={handleClickButton}>Go back</button>
             </div>
     )
 }
