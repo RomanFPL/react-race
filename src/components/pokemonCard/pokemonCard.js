@@ -1,11 +1,11 @@
 import s from "./pokemonCard.module.css"
 import cn from "classnames";
 
-const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardClick}) => {
+const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardClick, objID}) => {
     const {top, right, bottom, left} = values;
     
     return (
-        <div className={s.root} onClick={() => handleCardClick(id)}>
+        <div className={s.root} onClick={() => handleCardClick(id, objID)}>
             <div className={cn(s.pokemonCard, {[s.active] : active})}>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>

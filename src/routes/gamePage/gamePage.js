@@ -6,11 +6,6 @@ import cardBG from "../../assets/cardBack.jpg"
 
 import database from "../../services/firebase";
 
-database.ref("pokemons").on("value", (snapshot) => {
-    console.log(snapshot.val())
-})
-
-
 const GamePage = () => {
     const hist = useHistory()
     const handleClickButton = () => {
@@ -25,7 +20,7 @@ const GamePage = () => {
         })
     }, []);
 
-    const handleCardClick = (id) => {
+    const handleCardClick = (id, objID) => {
         setPokemons(prevState => {
             return Object.entries(prevState).reduce((acc, item) => {
                 const pokemon = {...item[1]};
@@ -37,6 +32,35 @@ const GamePage = () => {
         
                 return acc;
             }, {});
+        });
+        database.ref('pokemons/'+ objID).set({
+            "active": true,
+            "abilities": [
+                "keen-eye",
+                "tangled-feet",
+                "big-pecks"
+              ],
+            "base_experience": 122,
+            "height": 11,
+            "weight": 300,
+            "id": 17,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
+            "name": "pidgeotto",
+            "stats": {
+                "hp": 63,
+                "attack": 60,
+                "defense": 55,
+                "special-attack": 50,
+                "special-defense": 50,
+                "speed": 71
+              },
+              "type": "normal",
+              "values": {
+                "top": 7,
+                "right": 5,
+                "bottom": 1,
+                "left": 2
+              }
         });
         // setPokemons(prevState => {
         //     return Array.from(prevState, (item) => {
@@ -51,6 +75,7 @@ const GamePage = () => {
     }
 
     console.log(cards);
+    Object.entries(cards).map(([key, {id, type, values, img, name, active}]) => console.log(typeof key));
 
     return (
             <div>
@@ -59,7 +84,8 @@ const GamePage = () => {
                     <div className="flex">
                         {Object.entries(cards).map(([key, {id, type, values, img, name, active}]) => 
                         <PokemonCard 
-                            key={id} 
+                            key={key}
+                            objID={key} 
                             type={type} 
                             values={values} 
                             img={img} 
