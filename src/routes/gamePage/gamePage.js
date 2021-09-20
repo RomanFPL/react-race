@@ -46,21 +46,21 @@ const GamePage = () => {
     const [cards, setPokemons] = useState({});
 
     
-    const writeDataActive = async (objID, pokemonObj) => {
-        await database.ref('pokemons/'+ objID).set({
+    const writeDataActive = (objID, pokemonObj) => {
+        database.ref('pokemons/'+ objID).set({
             ...pokemonObj,
             "active": true,
         });          
     }
 
-    const addNewCard = async () => {
+    const addNewCard = () => {
         const newKey = database.ref().child('pokemons').push().key;
-        await database.ref('pokemons/' + newKey).set(newPokemon);
+        database.ref('pokemons/' + newKey).set(newPokemon);
         pokemonsAsState();
     }
 
-    const pokemonsAsState = async () => {
-        await database.ref("pokemons").once("value", (snapshot) => {
+    const pokemonsAsState = () => {
+        database.ref("pokemons").once("value", (snapshot) => {
             setPokemons(snapshot.val());
         })
     }
@@ -84,20 +84,7 @@ const GamePage = () => {
                 return acc;
             }, {});
         });
-        // setPokemons(prevState => {
-        //     return Array.from(prevState, (item) => {
-        //         if(item.id === id){
-        //             item.active = true;
-        //         }
-        //         return item;
-        //     })
-        // })
-        // const newCrads = cards.map(x => x.id === id ? {...x, active: true} : x);
-        // setPokemons(newCrads);
     }
-
-    // console.log(cards);
-    // Object.entries(cards).map(([key, val] ) => console.log(key, val));
 
     return (
             <div>
