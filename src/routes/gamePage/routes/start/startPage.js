@@ -25,8 +25,14 @@ const StartPage = () => {
         return () => firebase.offPokemonsSoket();
     }, []);
 
-    const handleCardClick = (id) => {
-      
+    const handleActiveSelected = (key) => {
+        setPokemons(prevState => ({
+            ...prevState,
+            [key]: {
+                ...prevState[key],
+                selected: !prevState[key].selected,
+            }
+        }))
     }
 
     return (
@@ -35,7 +41,7 @@ const StartPage = () => {
                 <section>
                 <button className={s.btnCenter}>Start game...</button>
                     <div className={s.flex}>
-                        {Object.entries(cards).map(([key, {id, type, values, img, name, active}]) => 
+                        {Object.entries(cards).map(([key, {id, type, values, img, name, selected}]) => 
                         <PokemonCard 
                             key={key}
                             type={type} 
@@ -45,7 +51,8 @@ const StartPage = () => {
                             id={id} 
                             cardBG={cardBG} 
                             isActive={true} 
-                            handleCardClick={handleCardClick}
+                            handleCardClick={() => handleActiveSelected(key)}
+                            isSelected={selected}
                             minimize={null}
                             className={s.card}/>)}
                     </div>

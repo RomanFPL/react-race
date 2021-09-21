@@ -1,10 +1,12 @@
 import s from "./pokemonCard.module.css"
 import cn from "classnames";
 
-const PokemonCard = ({type, values, img, name, id, isActive, handleCardClick, className, minimize}) => {
+const PokemonCard = ({type, values, img, name, id, isActive, isSelected, handleCardClick, className, minimize}) => {
   
     return (
-        <div className={cn(className, s.pokemonCard, {[s.active]: isActive})}
+        <div className={cn(className, s.pokemonCard, {
+            [s.active]: isActive,
+            [s.selected]: isSelected})}
         onClick={handleCardClick}>
         <div className={s.cardFront}>
             <div className={cn(s.wrap, s.front)}>
