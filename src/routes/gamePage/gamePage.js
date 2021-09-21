@@ -56,7 +56,6 @@ const GamePage = () => {
     const addNewCard = () => {
         const newKey = database.ref().child('pokemons').push().key;
         database.ref('pokemons/' + newKey).set(newPokemon);
-        pokemonsAsState();
     }
 
     const pokemonsAsState = () => {
@@ -75,11 +74,13 @@ const GamePage = () => {
                 const pokemon = {...item[1]};
                 const hesh = item[0];
                 if (pokemon.id === id) {
-                    pokemon.active = true;
+                    pokemon.active = !pokemon.active;
                     writeDataActive(hesh, pokemon);
                 };
         
                 acc[item[0]] = pokemon;
+
+                database.ref('pokemons/'+item[0]).set(pokemon);
         
                 return acc;
             }, {});
