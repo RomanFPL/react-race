@@ -53,6 +53,8 @@ const StartPage = () => {
         firebase.getPokemonsSoket((pokemons) => {
             setPokemons(pokemons);
         })
+
+        return () => firebase.getPokemonsSoket();
     }, []);
 
     const handleCardClick = (id) => {
