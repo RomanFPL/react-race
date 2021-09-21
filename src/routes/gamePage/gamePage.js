@@ -5,7 +5,6 @@ import s from "./style.module.css"
 
 import cardBG from "../../assets/cardBack.jpg"
 
-import database from "../../services/firebase";
 import { FireBaseContext } from "../../services/firebaseContect";
 
 const newPokemon = {
@@ -47,19 +46,14 @@ const GamePage = () => {
     const [cards, setPokemons] = useState({});
 
     const addNewCard = () => {
-        firebase.addPokemon(newPokemon, async () => {
-            await pokemonsAsState();
-        })
-    }
-
-    const pokemonsAsState = async () => {
-        const response = await firebase.getPokemonsOnce();
-        setPokemons(response);
+        firebase.addPokemon(newPokemon);
     }
     
     useEffect(() => {
-        pokemonsAsState();
-    });
+        firebase.getPokemonsSoket((pokemons) => {
+            setPokemons(pokemons);
+        })
+    }, []);
 
     const handleCardClick = (id) => {
         setPokemons(prevState => {

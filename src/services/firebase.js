@@ -20,6 +20,12 @@ export default  class Firebase {
       this.database= this.fire.database();
     }
 
+    getPokemonsSoket = (cb) => {
+      this.database.ref("pokemons").on("value", (snapshot) => {
+        cb(snapshot.val())
+      })
+    }
+
     getPokemonsOnce = async () => {
       return await this.database.ref("pokemons").once("value").then(snapshot => 
         snapshot.val())
