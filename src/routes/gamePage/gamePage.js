@@ -60,10 +60,9 @@ const GamePage = () => {
         // database.ref('pokemons/' + newKey).set(newPokemon);
     }
 
-    const pokemonsAsState = () => {
-        // database.ref("pokemons").once("value", (snapshot) => {
-        //     setPokemons(snapshot.val());
-        // })
+    const pokemonsAsState = async () => {
+        const response = await firebase.getPokemonsOnce();
+        setPokemons(response);
     }
     
     useEffect(() => {
