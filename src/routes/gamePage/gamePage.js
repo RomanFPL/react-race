@@ -39,7 +39,6 @@ const newPokemon = {
 const GamePage = () => {
     const firebase = useContext(FireBaseContext)
     const hist = useHistory();
-    console.log(firebase);
     
     const handleClickButton = () => {
         hist.push("/")
@@ -47,17 +46,10 @@ const GamePage = () => {
 
     const [cards, setPokemons] = useState({});
 
-    
-    const writeDataActive = (objID, pokemonObj) => {
-        // database.ref('pokemons/'+ objID).set({
-        //     ...pokemonObj,
-        //     "active": true,
-        // });          
-    }
-
     const addNewCard = () => {
-        const newKey = database.ref().child('pokemons').push().key;
-        // database.ref('pokemons/' + newKey).set(newPokemon);
+        firebase.addPokemon(newPokemon, async () => {
+            await pokemonsAsState();
+        })
     }
 
     const pokemonsAsState = async () => {
@@ -67,21 +59,19 @@ const GamePage = () => {
     
     useEffect(() => {
         pokemonsAsState();
-    }, []);
+    });
 
     const handleCardClick = (id) => {
         setPokemons(prevState => {
             return Object.entries(prevState).reduce((acc, item) => {
                 const pokemon = {...item[1]};
-                const hesh = item[0];
                 if (pokemon.id === id) {
                     pokemon.active = !pokemon.active;
-                    writeDataActive(hesh, pokemon);
                 };
-        
+                
                 acc[item[0]] = pokemon;
+                firebase.postPokemon(item[0], pokemon);
 
-                // database.ref('pokemons/'+item[0]).set(pokemon);
         
                 return acc;
             }, {});
