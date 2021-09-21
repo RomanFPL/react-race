@@ -5,7 +5,6 @@ const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardCli
     const {top, right, bottom, left} = values;
     
     return (
-        <div className={s.root} onClick={() => handleCardClick(id)}>
             <div className={cn(className, s.pokemonCard, {[s.active] : active})}>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>
@@ -39,7 +38,6 @@ const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardCli
                 </div>
 
             </div>
-        </div>
     )
 }
 
