@@ -1,11 +1,12 @@
 import { useHistory } from "react-router";
 import PokemonCard from "../../components/pokemonCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext} from "react";
 import s from "./style.module.css"
 
 import cardBG from "../../assets/cardBack.jpg"
 
 import database from "../../services/firebase";
+import { FireBaseContext } from "../../services/firebaseContect";
 
 const newPokemon = {
     "abilities": [
@@ -36,8 +37,9 @@ const newPokemon = {
 }
 
 const GamePage = () => {
-
+    const firebase = useContext(FireBaseContext)
     const hist = useHistory();
+    console.log(firebase);
     
     const handleClickButton = () => {
         hist.push("/")
@@ -47,21 +49,21 @@ const GamePage = () => {
 
     
     const writeDataActive = (objID, pokemonObj) => {
-        database.ref('pokemons/'+ objID).set({
-            ...pokemonObj,
-            "active": true,
-        });          
+        // database.ref('pokemons/'+ objID).set({
+        //     ...pokemonObj,
+        //     "active": true,
+        // });          
     }
 
     const addNewCard = () => {
         const newKey = database.ref().child('pokemons').push().key;
-        database.ref('pokemons/' + newKey).set(newPokemon);
+        // database.ref('pokemons/' + newKey).set(newPokemon);
     }
 
     const pokemonsAsState = () => {
-        database.ref("pokemons").once("value", (snapshot) => {
-            setPokemons(snapshot.val());
-        })
+        // database.ref("pokemons").once("value", (snapshot) => {
+        //     setPokemons(snapshot.val());
+        // })
     }
     
     useEffect(() => {
@@ -80,7 +82,7 @@ const GamePage = () => {
         
                 acc[item[0]] = pokemon;
 
-                database.ref('pokemons/'+item[0]).set(pokemon);
+                // database.ref('pokemons/'+item[0]).set(pokemon);
         
                 return acc;
             }, {});
