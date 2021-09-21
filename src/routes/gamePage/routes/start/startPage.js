@@ -22,8 +22,7 @@ const StartPage = () => {
         firebase.getPokemonsSoket((pokemons) => {
             setPokemons(pokemons);
         })
-
-        return () => firebase.getPokemonsSoket();
+        return () => firebase.offPokemonsSoket();
     }, []);
 
     const handleCardClick = (id) => {
@@ -35,7 +34,7 @@ const StartPage = () => {
                 <h1>This is Game Page!!!</h1>
                 <section>
                 <button className={s.btnCenter}>Start game...</button>
-                    <div className="flex">
+                    <div className={s.flex}>
                         {Object.entries(cards).map(([key, {id, type, values, img, name, active}]) => 
                         <PokemonCard 
                             key={key}
@@ -45,10 +44,10 @@ const StartPage = () => {
                             name={name} 
                             id={id} 
                             cardBG={cardBG} 
-                            active={true} 
+                            isActive={true} 
                             handleCardClick={handleCardClick}
                             minimize={null}
-                            className={null}/>)}
+                            className={s.card}/>)}
                     </div>
                 </section>
                 <button className={s.btnCenter} onClick={handleClickButton}>Go back</button>

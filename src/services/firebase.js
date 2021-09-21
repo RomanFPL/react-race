@@ -26,7 +26,7 @@ export default  class Firebase {
       })
     }
 
-    getPokemonsSoket = () => {
+    offPokemonsSoket = () => {
       this.database.ref("pokemons").off();
     }
 
