@@ -1,12 +1,12 @@
 import s from "./pokemonCard.module.css"
 import cn from "classnames";
 
-const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardClick}) => {
+const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardClick, className, minimize}) => {
     const {top, right, bottom, left} = values;
     
     return (
         <div className={s.root} onClick={() => handleCardClick(id)}>
-            <div className={cn(s.pokemonCard, {[s.active] : active})}>
+            <div className={cn(className, s.pokemonCard, {[s.active] : active})}>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>
                         <div className={cn(s.pokemon, s.type)}>
@@ -19,11 +19,15 @@ const PokemonCard = ({type, values, img, name, id, cardBG, active, handleCardCli
                             <div className={s.imgContainer}>
                                 <img src={img} alt={name} />
                             </div>
-                            <div className={s.info}>
+                            { !minimize && (<div className={s.info}>
                                 <span className={s.number}>#{id}</span>
-                                <h3 className={s.name}>{name}</h3>
-                                <small className={s.type}>Type: <span>{type}</span></small>
-                            </div>
+                                    <h3 className={s.name}>
+                                        {name}
+                                    </h3>
+                                    <small className={s.type}>
+                                        Type: <span>{type}</span>
+                                    </small>
+                            </div>)}
                         </div>
                     </div>
                 </div>

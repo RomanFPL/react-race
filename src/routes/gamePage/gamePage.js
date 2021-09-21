@@ -88,7 +88,9 @@ const GamePage = () => {
                             id={id} 
                             cardBG={cardBG} 
                             active={active === true} 
-                            handleCardClick={handleCardClick}/>)}
+                            handleCardClick={handleCardClick}
+                            minimize={null}
+                            className={null}/>)}
                     </div>
                 </section>
                 <button className={s.btnCenter} onClick={handleClickButton}>Go back</button>
