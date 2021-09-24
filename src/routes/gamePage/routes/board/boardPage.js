@@ -14,13 +14,14 @@ const BoardPage = () => {
     const [board, setBoard] = useState([])
     const [player2, setPlayer2] = useState([])
     const [player1, setPlayer1] = useState(() => {
-        return Object.values(cards).map(item => ({
+        return Object.values(cards.pokemons).map(item => ({
             ...item, 
             possession: 'blue'
         }))
     })
 
-    console.log("###", player2)
+    console.log("###2", player2)
+    console.log("###1", player1)
 
     useEffect(async () => {
         const boardResponse = await fetch("https://reactmarathon-api.netlify.app/api/board");
@@ -50,20 +51,7 @@ const BoardPage = () => {
     return (
         <div className={s.root}>
             <div className={s.playerOne}>
-                {Object.entries(cards.pokemons).map(([key, {id, type, values, img, name, selected}]) => 
-                    <PokemonCard 
-                        key={key}
-                        type={type} 
-                        values={values} 
-                        img={img} 
-                        name={name} 
-                        id={id} 
-                        cardBG={cardBG} 
-                        isActive={true} 
-                        handleCardClick={() => handleClickCard(key)}
-                        isSelected={false}
-                        minimize
-                        className={s.card}/>)}
+                <PlayerBoard cards={player1}/>
             </div>
             <div className={s.board}>
                 {board.map(item => (

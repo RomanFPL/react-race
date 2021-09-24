@@ -43,7 +43,7 @@ const StartPage = () => {
         selectedCards.addSelectedCard({[key]: Object.entries(cards).find(card => card[0]===key)[1]})
             // {...Object.entries(cards).filter(x => x[1].selected)});
     }
-    console.log(selectedCards);
+    console.log(selectedCards.pokemons);
 
     return (
             <div>
