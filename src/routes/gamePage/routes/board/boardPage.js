@@ -6,6 +6,23 @@ import s from './style.module.css';
 import { useHistory } from 'react-router';
 import PlayerBoard from './components/PlayerBoard';
 
+
+const counterWin = (board, player1, player2) => {
+    let player1Count = player1.length;
+    let player2Count = player2.length;
+    board.forEach(item => {
+        if(item && item.card && item.card.possession === 'red'){
+            player2Count++;
+        }
+        if(item && item.card && item.card.possession === 'blue'){
+            player1Count++;
+        }
+    });
+
+    return [player1Count, player2Count];
+}
+
+
 const BoardPage = () => {
     const cards = useContext(PokemonContext);
 
@@ -19,9 +36,10 @@ const BoardPage = () => {
             possession: 'blue'
         }))
     })
+    const [steps, setSteps] = useState(0);
 
-    console.log("###2", player2)
-    console.log("###1", player1)
+    // console.log("###2", player2)
+    // console.log("###1", player1)
 
     useEffect(() => {
         (async function () {
@@ -39,17 +57,15 @@ const BoardPage = () => {
             })
             })()
     }, [])
-    // if(Object.keys(cards.pokemons).length === 0){
-    //     history.replace("/game");
-    // }
 
-    const handleClickCard = () => {
-        console.log("click!")
+    if(Object.keys(cards.pokemons).length === 0){
+        history.replace("/game");
     }
 
     const handleClickBoardPlate = async (position) => {
-        console.log("###", "poss", position);
-        console.log("###", "choiseCard", choiceCard);
+        // console.log("###", "poss", position);
+        // console.log("###", "choiseCard", choiceCard);
+
         if(choiceCard) {
             const params = {
                 position,
@@ -67,17 +83,43 @@ const BoardPage = () => {
         const request = await res.json();
 
         console.log("dvuscvdjk", request)
-        setBoard(request.data);
-
+        
         if(choiceCard.player === 1) {
             setPlayer1(prev => prev.filter(item => item.id !== choiceCard.id))
         }
-
+        
         if(choiceCard.player === 2) {
             setPlayer2(prev => prev.filter(item => item.id !== choiceCard.id))
         }
+        
+        setBoard(request.data);
+
+        setSteps(prev => {
+            const count = prev + 1;
+            return count;
+        })
+
         }
     }
+
+    console.log("step", steps)
+
+    useEffect(() => {
+        counterWin(board, player1, player2)
+        if(steps === 9){
+            const [count1, count2] = counterWin(board, player1, player2);
+
+            if(count1 > count2){
+                    alert("WIN");
+            } else if(count1 < count2){
+                alert("LOSE")
+            } else {
+                    alert("DROW")
+            }
+            }
+
+    },[steps])
+
     return (
         <div className={s.root}>
             <div className={s.playerOne}>
