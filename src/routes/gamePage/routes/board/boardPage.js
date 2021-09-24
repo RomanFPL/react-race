@@ -107,10 +107,12 @@ const BoardPage = () => {
             } else if(count1 < count2){
                 alert("LOSE")
             } else {
-                    alert("DROW")
-            }
+                alert("DROW")
             }
 
+            history.push("/game/finish")
+        
+        }
     },[steps])
 
     return (
