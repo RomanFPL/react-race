@@ -5,6 +5,7 @@ import s from './style.module.css';
 
 import cardBG from "../../../../assets/cardBack.jpg"
 import { useHistory } from 'react-router';
+import PlayerBoard from './components/PlayerBoard';
 
 const BoardPage = () => {
     const cards = useContext(PokemonContext);
@@ -12,6 +13,12 @@ const BoardPage = () => {
     const history = useHistory();
     const [board, setBoard] = useState([])
     const [player2, setPlayer2] = useState([])
+    const [player1, setPlayer1] = useState(() => {
+        return Object.values(cards).map(item => ({
+            ...item, 
+            possession: 'blue'
+        }))
+    })
 
     console.log("###", player2)
 
@@ -22,7 +29,12 @@ const BoardPage = () => {
 
         const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
         const player2Requerst = await player2Response.json();
-        setPlayer2(player2Requerst.data)
+        setPlayer2(() => {
+            return player2Requerst.data.map(item => ({
+                ...item,
+                possession: 'red'
+            }))
+        })
     }, [])
     // if(Object.keys(cards.pokemons).length === 0){
     //     history.replace("/game");
@@ -31,10 +43,6 @@ const BoardPage = () => {
     const handleClickCard = () => {
         console.log("click!")
     }
-
-    player2.map(({id, type, values, img, name, selected}) => {
-        console.log(id, type, values, img, name, selected)
-    });
 
     const handleClickBoardPlate = (position) => {
         console.log(position)
@@ -68,20 +76,7 @@ const BoardPage = () => {
                 ))}
             </div>
             <div className={s.playerTwo}>
-                {player2.map(({id, type, values, img, name, selected}) => 
-                            <PokemonCard 
-                                key={id}
-                                type={type} 
-                                values={values} 
-                                img={img} 
-                                name={name} 
-                                id={id} 
-                                cardBG={cardBG} 
-                                isActive={true} 
-                                handleCardClick={() => handleClickCard(id)}
-                                isSelected={selected}
-                                minimize
-                                className={s.card}/>)}
+                <PlayerBoard cards={player2}/>
             </div>
         </div>
     );
