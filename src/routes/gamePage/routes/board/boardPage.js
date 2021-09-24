@@ -53,7 +53,7 @@ const BoardPage = () => {
                         cardBG={cardBG} 
                         isActive={true} 
                         handleCardClick={() => handleClickCard(key)}
-                        isSelected={selected}
+                        isSelected={false}
                         minimize
                         className={s.card}/>)}
             </div>
