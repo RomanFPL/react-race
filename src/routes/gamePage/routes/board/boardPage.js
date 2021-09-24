@@ -24,7 +24,7 @@ const BoardPage = () => {
                             id={id} 
                             cardBG={cardBG} 
                             isActive={true} 
-                            handleCardClick={handleClickCard(key)}
+                            handleCardClick={() => handleClickCard(key)}
                             isSelected={selected}
                             minimize={null}
                             className={s.card}/>)}
