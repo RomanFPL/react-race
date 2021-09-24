@@ -46,9 +46,28 @@ const BoardPage = () => {
         console.log("click!")
     }
 
-    const handleClickBoardPlate = (position) => {
+    const handleClickBoardPlate = async (position) => {
         console.log("###", "poss", position);
         console.log("###", "choiseCard", choiceCard);
+        if(choiceCard) {
+            const params = {
+                position,
+                card: choiceCard,
+                board
+            };
+            const res = await fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(params),
+        });
+
+        const request = await res.json();
+
+        console.log("dvuscvdjk", request)
+        setBoard(request.data);
+        }
     }
     return (
         <div className={s.root}>
@@ -65,7 +84,7 @@ const BoardPage = () => {
                     className={s.boardPlate}
                     key={item.position}
                     onClick={() => !item.card && handleClickBoardPlate(item.position)}>
-                        {item.card && <PokemonCard {...item} minimize />}
+                        {item.card && <PokemonCard {...item.card} isActive minimize />}
                     </div>
                 ))}
             </div>
