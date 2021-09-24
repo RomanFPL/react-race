@@ -11,7 +11,7 @@ const GamePage = () => {
     const [pokemons, setPokemons] = useState({});
 
     const handleSelectedCard = (cards) => {
-        setPokemons(prev => ({...prev, ...cards}))
+        setPokemons(prev => ({...cards}))
     }
     
     return (

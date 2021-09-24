@@ -18,8 +18,11 @@ const StartPage = () => {
         hist.push("/")
     }
 
-    console.log(selectedCards);
+    const handleClickStaert = () => {
+        hist.push("/game/board")
+    }
 
+    
     const [cards, setPokemons] = useState({});
     
     useEffect(() => {
@@ -28,7 +31,7 @@ const StartPage = () => {
         })
         return () => firebase.offPokemonsSoket();
     }, []);
-
+    
     const handleActiveSelected = (key) => {
         setPokemons(prevState => ({
             ...prevState,
@@ -37,14 +40,15 @@ const StartPage = () => {
                 selected: !prevState[key].selected,
             }
         }))
-        selectedCards.addSelectedCard({[key]: Object.entries(cards).find(card => card[0]===key)[1]});
+        selectedCards.addSelectedCard({...Object.entries(cards).filter(x => x[1].selected)});
     }
+    console.log(selectedCards);
 
     return (
             <div>
                 <h1>This is Game Page!!!</h1>
                 <section>
-                <button className={s.btnCenter}>Start game...</button>
+                <button className={s.btnCenter} onClick={handleClickStaert}> Start game...</button>
                     <div className={s.flex}>
                         {Object.entries(cards).map(([key, {id, type, values, img, name, selected}]) => 
                         <PokemonCard 
