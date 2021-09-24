@@ -38,8 +38,7 @@ const BoardPage = () => {
     })
     const [steps, setSteps] = useState(0);
 
-    // console.log("###2", player2)
-    // console.log("###1", player1)
+    console.log(cards, player2, player1)
 
     useEffect(() => {
         (async function () {
@@ -49,6 +48,7 @@ const BoardPage = () => {
 
             const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
             const player2Requerst = await player2Response.json();
+            cards.addEnemyCards(player2Requerst.data);
             setPlayer2(() => {
                 return player2Requerst.data.map(item => ({
                     ...item,
@@ -63,9 +63,6 @@ const BoardPage = () => {
     }
 
     const handleClickBoardPlate = async (position) => {
-        // console.log("###", "poss", position);
-        // console.log("###", "choiseCard", choiceCard);
-
         if(choiceCard) {
             const params = {
                 position,
@@ -81,8 +78,6 @@ const BoardPage = () => {
         });
 
         const request = await res.json();
-
-        console.log("dvuscvdjk", request)
         
         if(choiceCard.player === 1) {
             setPlayer1(prev => prev.filter(item => item.id !== choiceCard.id))
@@ -102,15 +97,13 @@ const BoardPage = () => {
         }
     }
 
-    console.log("step", steps)
-
     useEffect(() => {
         counterWin(board, player1, player2)
         if(steps === 9){
             const [count1, count2] = counterWin(board, player1, player2);
 
             if(count1 > count2){
-                    alert("WIN");
+                alert("WIN");
             } else if(count1 < count2){
                 alert("LOSE")
             } else {
