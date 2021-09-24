@@ -12,6 +12,7 @@ const BoardPage = () => {
 
     const history = useHistory();
     const [board, setBoard] = useState([])
+    const [choiceCard, setChoiseCard] = useState(null)
     const [player2, setPlayer2] = useState([])
     const [player1, setPlayer1] = useState(() => {
         return Object.values(cards.pokemons).map(item => ({
@@ -46,12 +47,16 @@ const BoardPage = () => {
     }
 
     const handleClickBoardPlate = (position) => {
-        console.log(position)
+        console.log("###", "poss", position);
+        console.log("###", "choiseCard", choiceCard);
     }
     return (
         <div className={s.root}>
             <div className={s.playerOne}>
-                <PlayerBoard cards={player1}/>
+                <PlayerBoard 
+                    cards={player1}
+                    onClickCard={(card) => setChoiseCard(card)}
+                />
             </div>
             <div className={s.board}>
                 {board.map(item => (
@@ -64,7 +69,10 @@ const BoardPage = () => {
                 ))}
             </div>
             <div className={s.playerTwo}>
-                <PlayerBoard cards={player2}/>
+                <PlayerBoard 
+                cards={player2}
+                onClickCard={(card) => setChoiseCard(card)}
+                />
             </div>
         </div>
     );
