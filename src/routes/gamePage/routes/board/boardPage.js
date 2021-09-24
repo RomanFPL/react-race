@@ -3,7 +3,6 @@ import PokemonCard from '../../../../components/pokemonCard';
 import { PokemonContext } from '../../../../services/pokemonContext';
 import s from './style.module.css';
 
-import cardBG from "../../../../assets/cardBack.jpg"
 import { useHistory } from 'react-router';
 import PlayerBoard from './components/PlayerBoard';
 
@@ -24,19 +23,21 @@ const BoardPage = () => {
     console.log("###2", player2)
     console.log("###1", player1)
 
-    useEffect(async () => {
-        const boardResponse = await fetch("https://reactmarathon-api.netlify.app/api/board");
-        const boardRequest = await boardResponse.json();
-        setBoard(boardRequest.data)
+    useEffect(() => {
+        (async function () {
+            const boardResponse = await fetch("https://reactmarathon-api.netlify.app/api/board");
+            const boardRequest = await boardResponse.json();
+            setBoard(boardRequest.data)
 
-        const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
-        const player2Requerst = await player2Response.json();
-        setPlayer2(() => {
-            return player2Requerst.data.map(item => ({
-                ...item,
-                possession: 'red'
-            }))
-        })
+            const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
+            const player2Requerst = await player2Response.json();
+            setPlayer2(() => {
+                return player2Requerst.data.map(item => ({
+                    ...item,
+                    possession: 'red'
+                }))
+            })
+            })()
     }, [])
     // if(Object.keys(cards.pokemons).length === 0){
     //     history.replace("/game");
