@@ -4,7 +4,7 @@ import s from "./style.module.css"
 import { useState } from "react";
 import cn from "classnames";
 
-const PlayerBoard = ({cards, onClickCard}) => {
+const PlayerBoard = ({player, cards, onClickCard}) => {
     const [isSelected, setSelected] = useState(null)
 
     return (
@@ -15,7 +15,9 @@ const PlayerBoard = ({cards, onClickCard}) => {
             })}
             onClick={
                 () => {setSelected(item.id)
-                    onClickCard && onClickCard(item)
+                    onClickCard && onClickCard({
+                        ...item, player
+                    })
                 }
         }
             >

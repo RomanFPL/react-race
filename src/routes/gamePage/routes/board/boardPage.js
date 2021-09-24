@@ -54,6 +54,7 @@ const BoardPage = () => {
         <div className={s.root}>
             <div className={s.playerOne}>
                 <PlayerBoard 
+                    player={1}
                     cards={player1}
                     onClickCard={(card) => setChoiseCard(card)}
                 />
@@ -70,6 +71,7 @@ const BoardPage = () => {
             </div>
             <div className={s.playerTwo}>
                 <PlayerBoard 
+                player={2}
                 cards={player2}
                 onClickCard={(card) => setChoiseCard(card)}
                 />
