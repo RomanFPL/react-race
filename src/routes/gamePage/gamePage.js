@@ -15,7 +15,8 @@ const GamePage = () => {
     }
     
     return (
-        <PokemonContext.Provider value={{
+        <PokemonContext.Provider 
+        value={{
             pokemons,
             addSelectedCard: handleSelectedCard
             }}>
