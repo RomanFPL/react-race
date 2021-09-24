@@ -3,14 +3,19 @@ import PokemonCard from "../../../../components/pokemonCard";
 import cardBG from "../../../../assets/cardBack.jpg"
 import { PokemonContext } from "../../../../services/pokemonContext";
 import s from "./style.module.css"
+import { useHistory } from "react-router";
 
 const FinishPage = () => {
     const cards = useContext(PokemonContext);
-    // console.log(cards.pokemonsEnemy)
-    Object.entries(cards.pokemonsEnemy).map(x=> console.log(x))
+    const history = useHistory()
+
+    if(!Object.values(cards.pokemons).length){
+        history.replace("/game/");
+    }
+
     return (
         <div>
-             <h1>This is Game Page!!!</h1>
+             <h1>Finish</h1>
              <section className={s.player}>
              {Object.entries(cards.pokemons).map(([key, {id, type, values, img, name, selected}]) => (
                  <div className={s.cardWrap}>
@@ -30,6 +35,7 @@ const FinishPage = () => {
                  </div>
              ))}
              </section>
+             <button className={s.btnCenter}> End game</button>
              <section className={s.player}>
              {Object.entries(cards.pokemonsEnemy).map(([key, {id, type, values, img, name, selected}]) => (
                  <div className={s.cardWrap}>

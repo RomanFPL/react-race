@@ -9,4 +9,10 @@
     display: grid;
     grid-template-columns: repeat(5, auto);
     justify-items: center;
+    padding: 15px;
+}
+
+.btnCenter {
+    display: block;
+    margin: 0 auto;
 }
