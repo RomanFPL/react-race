@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PokemonCard from '../../../../components/pokemonCard';
 import { PokemonContext } from '../../../../services/pokemonContext';
 import s from './style.module.css';
@@ -10,13 +10,25 @@ const BoardPage = () => {
     const cards = useContext(PokemonContext);
 
     const history = useHistory();
+    const [board, setBoard] = useState([])
 
-    if(Object.keys(cards.pokemons).length === 0){
-        history.replace("/game");
-    }
+    console.log("###", board)
+
+    useEffect(async () => {
+        const boardResponse = await fetch("https://reactmarathon-api.netlify.app/api/board");
+        const boardRequest = await boardResponse.json();
+        setBoard(boardRequest.data)
+    }, [])
+    // if(Object.keys(cards.pokemons).length === 0){
+    //     history.replace("/game");
+    // }
 
     const handleClickCard = () => {
         console.log("click!")
+    }
+
+    const handleClickBoardPlate = (position) => {
+        console.log(position)
     }
     return (
         <div className={s.root}>
@@ -37,15 +49,14 @@ const BoardPage = () => {
                             className={s.card}/>)}
 						</div>
             <div className={s.board}>
-                <div className={s.boardPlate}>1</div>
-                <div className={s.boardPlate}>2</div>
-                <div className={s.boardPlate}>3</div>
-                <div className={s.boardPlate}>4</div>
-                <div className={s.boardPlate}>5</div>
-                <div className={s.boardPlate}>6</div>
-                <div className={s.boardPlate}>7</div>
-                <div className={s.boardPlate}>8</div>
-                <div className={s.boardPlate}>9</div>
+                {board.map(item => (
+                    <div 
+                    className={s.boardPlate}
+                    key={item.position}
+                    onClick={() => !item.card && handleClickBoardPlate(item.position)}>
+                        {item.card && <PokemonCard {...item} minimize />}
+                    </div>
+                ))}
             </div>
         </div>
     );
