@@ -67,6 +67,14 @@ const BoardPage = () => {
 
         console.log("dvuscvdjk", request)
         setBoard(request.data);
+
+        if(choiceCard.player === 1) {
+            setPlayer1(prev => prev.filter(item => item.id !== choiceCard.id))
+        }
+
+        if(choiceCard.player === 2) {
+            setPlayer2(prev => prev.filter(item => item.id !== choiceCard.id))
+        }
         }
     }
     return (
