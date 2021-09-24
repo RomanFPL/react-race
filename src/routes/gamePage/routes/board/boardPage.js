@@ -4,9 +4,16 @@ import { PokemonContext } from '../../../../services/pokemonContext';
 import s from './style.module.css';
 
 import cardBG from "../../../../assets/cardBack.jpg"
+import { useHistory } from 'react-router';
 
 const BoardPage = () => {
     const cards = useContext(PokemonContext);
+
+    const history = useHistory();
+
+    if(Object.keys(cards.pokemons).length === 0){
+        history.replace("/game");
+    }
 
     const handleClickCard = () => {
         console.log("click!")
@@ -26,7 +33,7 @@ const BoardPage = () => {
                             isActive={true} 
                             handleCardClick={() => handleClickCard(key)}
                             isSelected={selected}
-                            minimize={null}
+                            minimize
                             className={s.card}/>)}
 						</div>
             <div className={s.board}>
