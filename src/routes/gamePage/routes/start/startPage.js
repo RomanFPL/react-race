@@ -6,15 +6,19 @@ import s from "./style.module.css"
 import cardBG from "../../../../assets/cardBack.jpg"
 
 import { FireBaseContext } from "../../../../services/firebaseContect";
+import { PokemonContext } from "../../../../services/pokemonContext";
 
 
 const StartPage = () => {
     const firebase = useContext(FireBaseContext)
+    const selectedCards = useContext(PokemonContext);
     const hist = useHistory();
     
     const handleClickButton = () => {
         hist.push("/")
     }
+
+    console.log(selectedCards);
 
     const [cards, setPokemons] = useState({});
     
@@ -33,6 +37,7 @@ const StartPage = () => {
                 selected: !prevState[key].selected,
             }
         }))
+        selectedCards.addSelectedCard({[key]: Object.entries(cards).find(card => card[0]===key)[1]});
     }
 
     return (
