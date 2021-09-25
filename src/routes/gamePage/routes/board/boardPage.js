@@ -56,7 +56,7 @@ const BoardPage = () => {
                 }))
             })
             })()
-    }, [])
+    }, [cards])
 
     if(Object.keys(cards.pokemons).length === 0){
         history.replace("/game");
@@ -114,7 +114,7 @@ const BoardPage = () => {
             history.push("/game/finish")
         
         }
-    },[steps])
+    },[steps, player1, player2,board,cards,history])
 
     return (
         <div className={s.root}>
