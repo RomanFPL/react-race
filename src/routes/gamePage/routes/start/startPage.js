@@ -19,10 +19,14 @@ const StartPage = () => {
     }
 
     const handleClickStaert = () => {
-        hist.push("/game/board")
+        const selectedElems = Object.entries(cards).map(x => x[1]).filter(x => x.selected)
+        if(selectedElems.length === 5 ){
+            hist.push("/game/board");
+            selectedCards.addSelectedCard(selectedElems);
+        } else {
+            alert("You can start the game only if you have 5 cards selected, no more, no less.")
+        }
     }
-
-    console.log(selectedCards)
 
     const [cards, setPokemons] = useState({});
     
@@ -41,10 +45,7 @@ const StartPage = () => {
                 selected: !prevState[key].selected,
             }
         }))
-        selectedCards.addSelectedCard({[key]: Object.entries(cards).find(card => card[0]===key)[1]})
-            // {...Object.entries(cards).filter(x => x[1].selected)});
-    }
-    console.log(selectedCards.pokemons);
+        }
 
     return (
             <div>

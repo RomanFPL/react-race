@@ -17,10 +17,13 @@ const FinishPage = () => {
     const [cardNum, setCardNum] = useState({})
     
     const handleBtnClick = () => {
-        if(cards.playStatus){
+        if(cards.playStatus && Object.values(selectedCard)){
             firebase.addPokemon({...selectedCard, selected: false});
         }
         history.replace("/game/");
+        cards.addSelectedCard({})
+        cards.addEnemyCards({})
+        cards.setGameStatus(0)
     }
 
     const handleCardClick =(item, i) => {
@@ -37,7 +40,7 @@ const FinishPage = () => {
     return (
         <div>
              <h1 className={s.btnCenter} style={{textAlign: "center"}}>Finish</h1>
-             <h1 className={s.btnCenter} style={{textAlign: "center"}}>{cards.playStatus ? "You win. Select one from enemy cards to add it to your deck." : "Game over!"}</h1>
+             <h1 className={s.btnCenter} style={{textAlign: "center"}}>{cards.playStatus ? "You win. Select one of enemy cards to add it to your deck." : "Game over!"}</h1>
              <section className={s.player}>
              {Object.entries(cards.pokemons).map(([key, {id, type, values, img, name, selected}]) => (
                  <div className={s.cardWrap} key={key}>
