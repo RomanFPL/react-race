@@ -31,7 +31,7 @@ const StartPage = () => {
             setPokemons(pokemons);
         })
         return () => firebase.offPokemonsSoket();
-    }, [firebase]);
+    }, []);
     
     const handleActiveSelected = (key) => {
         setPokemons(prevState => ({
