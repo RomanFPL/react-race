@@ -16,3 +16,7 @@
     display: block;
     margin: 0 auto;
 }
+
+.selectedCard{
+    transform: translateY(-15px);
+}
