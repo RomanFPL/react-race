@@ -103,6 +103,7 @@ const BoardPage = () => {
             const [count1, count2] = counterWin(board, player1, player2);
 
             if(count1 > count2){
+                cards.setGameStatus(1);
                 alert("WIN");
             } else if(count1 < count2){
                 alert("LOSE")

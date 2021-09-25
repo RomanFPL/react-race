@@ -22,7 +22,8 @@ const StartPage = () => {
         hist.push("/game/board")
     }
 
-    
+    console.log(selectedCards)
+
     const [cards, setPokemons] = useState({});
     
     useEffect(() => {

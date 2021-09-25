@@ -6,24 +6,38 @@ import s from "./style.module.css"
 import { useHistory } from "react-router";
 import cn from "classnames";
 import { useState } from "react/cjs/react.development";
+import { FireBaseContext } from "../../../../services/firebaseContect";
 
 const FinishPage = () => {
     const cards = useContext(PokemonContext);
+    const firebase = useContext(FireBaseContext)
     const history = useHistory()
 
     const [selectedCard, setSelectedCard] = useState({})
     const [cardNum, setCardNum] = useState({})
     
-
-    if(!Object.values(cards.pokemons).length){
+    const handleBtnClick = () => {
+        if(cards.playStatus){
+            firebase.addPokemon({...selectedCard, selected: false});
+        }
         history.replace("/game/");
     }
 
-    console.log(selectedCard);
+    const handleCardClick =(item, i) => {
+        if(cards.playStatus){
+            setSelectedCard(item);
+            setCardNum(i);
+        }
+    }
+
+    if(!Object.values(cards.pokemons).length){
+        history.replace("/game/"); 
+    }
+
     return (
         <div>
              <h1 className={s.btnCenter} style={{textAlign: "center"}}>Finish</h1>
-             <h1 className={s.btnCenter} style={{textAlign: "center"}}>You win. Select one from enemy cards to add it to your deck.</h1>
+             <h1 className={s.btnCenter} style={{textAlign: "center"}}>{cards.playStatus ? "You win. Select one from enemy cards to add it to your deck." : "Game over!"}</h1>
              <section className={s.player}>
              {Object.entries(cards.pokemons).map(([key, {id, type, values, img, name, selected}]) => (
                  <div className={s.cardWrap} key={key}>
@@ -43,7 +57,7 @@ const FinishPage = () => {
                  </div>
              ))}
              </section>
-             <button className={s.btnCenter} onClick={() => history.replace("/game/")}> End game</button>
+             <button className={s.btnCenter} onClick={handleBtnClick}> End game</button>
              <section className={s.player}>
              {Object.entries(cards.pokemonsEnemy).map(([key, {id, type, values, img, name, selected}], i) => (
                  <div className={cn(s.cardWrap, {[s.selectedCard]: cardNum===i})} key={key}>
@@ -56,10 +70,7 @@ const FinishPage = () => {
                         id={id} 
                         cardBG={cardBG} 
                         isActive={true} 
-                        handleCardClick={() => {
-                            setSelectedCard({id, type, values, img, name, selected});
-                            setCardNum(i);
-                        }}
+                        handleCardClick={() => handleCardClick({id, type, values, img, name, selected}, i)}
                         isSelected={selected}
                         minimize={null}
                     />

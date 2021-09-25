@@ -10,7 +10,7 @@ const GamePage = () => {
 
     const [pokemons, setPokemons] = useState({});
     const [pokemonsEnemy, setpokemonsEnemy] = useState({});
-    const [playStatus,  setPlayStatus] = useState({});
+    const [playStatus,  setPlayStatus] = useState(0);
 
     const handleSelectedCard = (cards) => {
         setPokemons(prev => ({...prev,...cards}))
