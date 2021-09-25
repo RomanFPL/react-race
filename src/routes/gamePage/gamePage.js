@@ -10,6 +10,7 @@ const GamePage = () => {
 
     const [pokemons, setPokemons] = useState({});
     const [pokemonsEnemy, setpokemonsEnemy] = useState({});
+    const [playStatus,  setPlayStatus] = useState({});
 
     const handleSelectedCard = (cards) => {
         setPokemons(prev => ({...prev,...cards}))
@@ -18,14 +19,20 @@ const GamePage = () => {
     const handleEnemyCards = (cards) => {
         setpokemonsEnemy(prev => ({...prev,...cards}))
     }
+
+    const setStatus = (status) => {
+        setPlayStatus(prev => ({...prev,...status}))
+    }
     
     return (
         <PokemonContext.Provider 
         value={{
             pokemons,
             pokemonsEnemy,
+            playStatus,
             addSelectedCard: handleSelectedCard,
-            addEnemyCards: handleEnemyCards
+            addEnemyCards: handleEnemyCards,
+            setGameStatus: setStatus
             }}>
             <Switch>
                 <Route path={`${match.path}/`} exact component={StartPage} />

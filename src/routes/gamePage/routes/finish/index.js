@@ -15,7 +15,8 @@ const FinishPage = () => {
 
     return (
         <div>
-             <h1>Finish</h1>
+             <h1 className={s.btnCenter} style={{textAlign: "center"}}>Finish</h1>
+             <h1 className={s.btnCenter} style={{textAlign: "center"}}>You win. Select one from enemy cards to add it to your deck.</h1>
              <section className={s.player}>
              {Object.entries(cards.pokemons).map(([key, {id, type, values, img, name, selected}]) => (
                  <div className={s.cardWrap}>
@@ -35,7 +36,7 @@ const FinishPage = () => {
                  </div>
              ))}
              </section>
-             <button className={s.btnCenter}> End game</button>
+             <button className={s.btnCenter} onClick={() => history.replace("/game/")}> End game</button>
              <section className={s.player}>
              {Object.entries(cards.pokemonsEnemy).map(([key, {id, type, values, img, name, selected}]) => (
                  <div className={s.cardWrap}>
