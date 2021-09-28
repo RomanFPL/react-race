@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { plusAction } from "../../store/counter";
+import { plusAction, selectCount } from "../../store/counter";
 import s from "./header.module.css"
 
 const Header = ({title, descr}) => {
     const hist = useHistory();
-    const count = useSelector((state) => state.value)
+    const count = useSelector(selectCount)
     const dispatch =  useDispatch(plusAction)
     console.log("Count", count)
     const handleClick = () => {

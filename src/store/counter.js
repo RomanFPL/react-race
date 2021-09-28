@@ -1,32 +1,24 @@
-export const plusAction = (amound) => {
-    return {
-        type: "PLUS",
-        payload: amound
-    };
-}
+import { createSlice } from "@reduxjs/toolkit";
 
-export const minusAction = (amound) => {
-    return {
-        type: "PLUS",
-        payload: amound
-    };
-}
-
-const counter = (state = {value: 0}, action) => {
-    switch(action.type){
-        case "PLUS":
-        return {
+export const slice = createSlice({
+    name: "counter",
+    initialState: {
+        value: 0,
+    }, 
+    reducers: {
+        plusAction: (state, action) => ({
             ...state,
-            value: state.value + action.payload 
-        }
-        case "MINUS":
-            return {
-                ...state,
-                value: state.value - action.payload,
-            }
-        default:
-            return state;
+            value: state.value + action.payload
+        }),
+        minusAction: (state, action) => ({
+            ...state,
+            value: state.value - action.payload
+        }),
     }
-}
+});
 
-export default counter;
+export const {plusAction,minusAction} = slice.actions;
+
+export const selectCount = state => state.counter.value;
+
+export default slice.reducer;
