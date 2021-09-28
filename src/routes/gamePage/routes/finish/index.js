@@ -21,9 +21,7 @@ const FinishPage = () => {
             firebase.addPokemon({...selectedCard, selected: false});
         }
         history.replace("/game/");
-        cards.addSelectedCard({})
-        cards.addEnemyCards({})
-        cards.setGameStatus(0)
+        cards.clearContext();
     }
 
     const handleCardClick =(item, i) => {
