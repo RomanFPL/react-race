@@ -17,11 +17,16 @@ const FinishPage = () => {
     const [cardNum, setCardNum] = useState({})
     
     const handleBtnClick = () => {
-        if(cards.playStatus && Object.values(selectedCard)){
+        if(cards.playStatus && Object.values(selectedCard).length){
             firebase.addPokemon({...selectedCard, selected: false});
+            history.replace("/game/");
+            cards.clearContext();
+        } else if(!cards.playStatus){
+            history.replace("/game/");
+            cards.clearContext();
+        } else {
+            alert("You should select one enemy card!")
         }
-        history.replace("/game/");
-        cards.clearContext();
     }
 
     const handleCardClick =(item, i) => {
