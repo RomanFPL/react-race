@@ -1,0 +1,18 @@
+.flex {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 40px;
+    justify-items: center;
+}
+
+.btnCenter {
+    display: block;
+    margin: 0 auto;
+}
+
+.card {
+    /* width: 268px; */
+    width: 100%;
+    height: 388px;
+    margin: 16px;
+}

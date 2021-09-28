@@ -1,0 +1,22 @@
+.cardWrap{
+    width: 15vw;
+    height: 100%;
+    max-height: 388px;
+}
+
+.player{
+    height: 40vh;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-items: center;
+    padding: 15px;
+}
+
+.btnCenter {
+    display: block;
+    margin: 0 auto;
+}
+
+.selectedCard{
+    transform: translateY(-15px);
+}
