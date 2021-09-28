@@ -7,12 +7,16 @@ import cardBG from "../../../../assets/cardBack.jpg"
 
 import { FireBaseContext } from "../../../../services/firebaseContect";
 import { PokemonContext } from "../../../../services/pokemonContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getPokemons, selectPokemonsData } from "../../../../store/pokemon";
 
 
 const StartPage = () => {
     const firebase = useContext(FireBaseContext)
     const selectedCards = useContext(PokemonContext);
     const hist = useHistory();
+    const pokemonsRedux = useSelector(selectPokemonsData);
+    const dispatch = useDispatch();
     
     const handleClickButton = () => {
         hist.push("/")
@@ -33,6 +37,7 @@ const StartPage = () => {
     useEffect(() => {
         firebase.getPokemonsSoket((pokemons) => {
             setPokemons(pokemons);
+            dispatch(getPokemons(pokemons));
         })
         return () => firebase.offPokemonsSoket();
     }, []);
