@@ -1,10 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { plusAction, selectCount } from "../../store/counter";
 import s from "./header.module.css"
 
 const Header = ({title, descr}) => {
     const hist = useHistory();
+    const count = useSelector(selectCount)
+    const dispatch =  useDispatch(plusAction)
+    console.log("Count", count)
     const handleClick = () => {
-        hist.push("game")
+        // hist.push("game")
+        dispatch(plusAction(1));
     }
     return (
         <header className={s.root}>

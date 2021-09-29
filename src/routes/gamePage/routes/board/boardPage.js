@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PokemonCard from '../../../../components/pokemonCard';
-import { PokemonContext } from '../../../../services/pokemonContext';
 import s from './style.module.css';
 
 import { useHistory } from 'react-router';
 import PlayerBoard from './components/PlayerBoard';
+import {selectPokemonsPlay, setGameStatus, setPokemonsEnemy } from '../../../../store/pokemon';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const counterWin = (board, player1, player2) => {
@@ -24,21 +25,21 @@ const counterWin = (board, player1, player2) => {
 
 
 const BoardPage = () => {
-    const cards = useContext(PokemonContext);
+    const cards = useSelector(selectPokemonsPlay);
+    const dispatch = useDispatch();
 
     const history = useHistory();
     const [board, setBoard] = useState([])
     const [choiceCard, setChoiseCard] = useState(null)
     const [player2, setPlayer2] = useState([])
     const [player1, setPlayer1] = useState(() => {
-        return Object.values(cards.pokemons).map(item => ({
+        return Object.values(cards).map(item => ({
             ...item, 
             possession: 'blue'
         }))
     })
     const [steps, setSteps] = useState(0);
 
-    console.log(cards, player2, player1)
 
     useEffect(() => {
         (async function () {
@@ -48,7 +49,7 @@ const BoardPage = () => {
 
             const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
             const player2Requerst = await player2Response.json();
-            cards.addEnemyCards(player2Requerst.data);
+            dispatch(setPokemonsEnemy(player2Requerst.data))
             setPlayer2(() => {
                 return player2Requerst.data.map(item => ({
                     ...item,
@@ -58,7 +59,7 @@ const BoardPage = () => {
             })()
     }, [])
 
-    if(Object.keys(cards.pokemons).length === 0){
+    if(Object.keys(cards).length === 0){
         history.replace("/game");
     }
 
@@ -103,7 +104,7 @@ const BoardPage = () => {
             const [count1, count2] = counterWin(board, player1, player2);
 
             if(count1 > count2){
-                cards.setGameStatus(1);
+                dispatch(setGameStatus());
                 alert("WIN");
             } else if(count1 < count2){
                 alert("LOSE")

@@ -1,28 +1,31 @@
 import { useHistory } from "react-router";
 import PokemonCard from "../../../../components/pokemonCard";
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect } from "react";
 import s from "./style.module.css"
 
 import cardBG from "../../../../assets/cardBack.jpg"
-
-import { FireBaseContext } from "../../../../services/firebaseContect";
-import { PokemonContext } from "../../../../services/pokemonContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getPokemonsAsync, 
+        selectPokemonsData, 
+        selectPokemonsLoading, 
+        setPokemonsPlay } from "../../../../store/pokemon";
 
 
 const StartPage = () => {
-    const firebase = useContext(FireBaseContext)
-    const selectedCards = useContext(PokemonContext);
     const hist = useHistory();
-    
+    const pokemonsRedux = useSelector(selectPokemonsData);
+    const isLoading = useSelector(selectPokemonsLoading);
+    const dispatch = useDispatch();
+
     const handleClickButton = () => {
         hist.push("/")
     }
 
-    const handleClickStaert = () => {
+    const handleClickStart = () => {
         const selectedElems = Object.entries(cards).map(x => x[1]).filter(x => x.selected)
         if(selectedElems.length === 5 ){
             hist.push("/game/board");
-            selectedCards.addSelectedCard(selectedElems);
+            dispatch(setPokemonsPlay(selectedElems));
         } else {
             alert("You can start the game only if you have 5 cards selected, no more, no less.")
         }
@@ -31,11 +34,12 @@ const StartPage = () => {
     const [cards, setPokemons] = useState({});
     
     useEffect(() => {
-        firebase.getPokemonsSoket((pokemons) => {
-            setPokemons(pokemons);
-        })
-        return () => firebase.offPokemonsSoket();
+        dispatch(getPokemonsAsync());
     }, []);
+
+    useEffect(() => {
+        setPokemons(pokemonsRedux)
+    }, [pokemonsRedux])
     
     const handleActiveSelected = (key) => {
         setPokemons(prevState => ({
@@ -51,7 +55,7 @@ const StartPage = () => {
             <div>
                 <h1>This is Game Page!!!</h1>
                 <section>
-                <button className={s.btnCenter} onClick={handleClickStaert}> Start game...</button>
+                <button className={s.btnCenter} onClick={handleClickStart}> Start game...</button>
                     <div className={s.flex}>
                         {Object.entries(cards).map(([key, {id, type, values, img, name, selected}]) => 
                         <PokemonCard 

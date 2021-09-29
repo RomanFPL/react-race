@@ -13,7 +13,7 @@ const firebaseConfig = {
   
   firebase.initializeApp(firebaseConfig);
 
-export default  class Firebase {
+class Firebase {
 
     constructor() {
       this.fire = firebase;
@@ -44,3 +44,7 @@ export default  class Firebase {
       this.database.ref('pokemons/' + newKey).set(data);
     }
   }
+
+  const FirebaseClass = new Firebase();
+
+  export default FirebaseClass;
