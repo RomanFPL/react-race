@@ -6,7 +6,10 @@ export const slice = createSlice({
     initialState: {
         isLoading: false,
         data: {},
-        error: null
+        error: null,
+        pokemonsForPlay: {},
+        enemiesPokemons: {},
+        gameStatus: 0 
     }, 
     reducers: {
         fetchPokemons: state => ({
@@ -24,17 +27,40 @@ export const slice = createSlice({
             data: {},
             error: action.payload
         }),
-        getPokemons: (state, action) => ({
+        setPokemonsPlay: (state, action) => ({
             ...state,
-            data: action.payload
+            pokemonsForPlay: action.payload
+        }),
+        setPokemonsEnemy: (state, action) => ({
+            ...state,
+            enemiesPokemons: action.payload,
+        }),
+        setGameStatus: (state) => ({
+            ...state,
+            gameStatus: 1
+        }),
+        clearGameState: (state) => ({
+            ...state,
+            pokemonsForPlay: {},
+            enemiesPokemons: {},
+            gameStatus: 0 
         })
     }
 });
 
-export const {getPokemons, fetchPokemons, fetchPokemonsResolve, fetchPokemonsReject} = slice.actions;
+export const {fetchPokemons, 
+        fetchPokemonsResolve, 
+        fetchPokemonsReject, 
+        setPokemonsPlay, 
+        setPokemonsEnemy, 
+        setGameStatus,
+        clearGameState} = slice.actions;
 
 export const selectPokemonsLoading = state => state.pokemons.isLoading;
 export const selectPokemonsData = state => state.pokemons.data;
+export const selectPokemonsPlay = state => state.pokemons.pokemonsForPlay;
+export const selectPokemonsEnemies = state => state.pokemons.enemiesPokemons;
+export const selectGameStatus = state => state.pokemons.gameStatus;
 
 export const getPokemonsAsync = () => async (dispatch) => {
     dispatch(fetchPokemons());
