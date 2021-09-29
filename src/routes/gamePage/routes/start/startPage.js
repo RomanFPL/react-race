@@ -1,10 +1,9 @@
 import { useHistory } from "react-router";
 import PokemonCard from "../../../../components/pokemonCard";
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect } from "react";
 import s from "./style.module.css"
 
 import cardBG from "../../../../assets/cardBack.jpg"
-import { PokemonContext } from "../../../../services/pokemonContext";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonsAsync, 
         selectPokemonsData, 
@@ -13,12 +12,11 @@ import { getPokemonsAsync,
 
 
 const StartPage = () => {
-    const selectedCards = useContext(PokemonContext);
     const hist = useHistory();
     const pokemonsRedux = useSelector(selectPokemonsData);
     const isLoading = useSelector(selectPokemonsLoading);
     const dispatch = useDispatch();
-    
+
     const handleClickButton = () => {
         hist.push("/")
     }
@@ -27,7 +25,6 @@ const StartPage = () => {
         const selectedElems = Object.entries(cards).map(x => x[1]).filter(x => x.selected)
         if(selectedElems.length === 5 ){
             hist.push("/game/board");
-            selectedCards.addSelectedCard(selectedElems);
             dispatch(setPokemonsPlay(selectedElems));
         } else {
             alert("You can start the game only if you have 5 cards selected, no more, no less.")

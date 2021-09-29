@@ -61,12 +61,12 @@ export const selectPokemonsData = state => state.pokemons.data;
 export const selectPokemonsPlay = state => state.pokemons.pokemonsForPlay;
 export const selectPokemonsEnemies = state => state.pokemons.enemiesPokemons;
 export const selectGameStatus = state => state.pokemons.gameStatus;
+export const firebase = FirebaseClass;
 
 export const getPokemonsAsync = () => async (dispatch) => {
     dispatch(fetchPokemons());
     const data = await FirebaseClass.getPokemonsOnce();
     dispatch(fetchPokemonsResolve(data));
 }
-
 
 export default slice.reducer;

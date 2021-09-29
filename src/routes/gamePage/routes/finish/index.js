@@ -1,16 +1,13 @@
-import { useContext } from "react";
 import PokemonCard from "../../../../components/pokemonCard";
 import cardBG from "../../../../assets/cardBack.jpg"
 import s from "./style.module.css"
 import { useHistory } from "react-router";
 import cn from "classnames";
 import { useState } from "react/cjs/react.development";
-import { FireBaseContext } from "../../../../services/firebaseContect";
 import { useDispatch, useSelector } from "react-redux";
-import { clearGameState, selectGameStatus, selectPokemonsEnemies, selectPokemonsPlay } from "../../../../store/pokemon";
+import { clearGameState, selectGameStatus, selectPokemonsEnemies, selectPokemonsPlay, firebase } from "../../../../store/pokemon";
 
 const FinishPage = () => {
-    const firebase = useContext(FireBaseContext)
     const history = useHistory()
     const dispatch = useDispatch();
     const pokemons = useSelector(selectPokemonsPlay);
