@@ -5,19 +5,19 @@ import s from "./style.module.css"
 
 import cardBG from "../../../../assets/cardBack.jpg"
 
-import { FireBaseContext } from "../../../../services/firebaseContect";
 import { PokemonContext } from "../../../../services/pokemonContext";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonsAsync, selectPokemonsData } from "../../../../store/pokemon";
+import { getPokemonsAsync, selectPokemonsData, selectPokemonsLoading } from "../../../../store/pokemon";
 
 
 const StartPage = () => {
-    const firebase = useContext(FireBaseContext)
     const selectedCards = useContext(PokemonContext);
     const hist = useHistory();
     const pokemonsRedux = useSelector(selectPokemonsData);
     const dispatch = useDispatch();
+    const isLoading = useSelector(selectPokemonsLoading)
     console.log("#### redux",pokemonsRedux)
+    console.log("#### loading", isLoading)
 
     const handleClickButton = () => {
         hist.push("/")
@@ -36,13 +36,17 @@ const StartPage = () => {
     const [cards, setPokemons] = useState({});
     
     useEffect(() => {
-        firebase.getPokemonsSoket((pokemons) => {
-            setPokemons(pokemons);
+        // firebase.getPokemonsSoket((pokemons) => {
+        //     setPokemons(pokemons);
+        //     dispatch(getPokemons(pokemons));
+        // })
             dispatch(getPokemonsAsync());
-            // dispatch(getPokemons(pokemons));
-        })
-        return () => firebase.offPokemonsSoket();
+        // return () => firebase.offPokemonsSoket();
     }, []);
+
+    useEffect(() => {
+        setPokemons(pokemonsRedux)
+    }, [pokemonsRedux])
     
     const handleActiveSelected = (key) => {
         setPokemons(prevState => ({
