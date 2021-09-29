@@ -10,12 +10,13 @@ import Footer from "./components/footer";
 import MenuHeader from "./components/menuHeader";
 
 import { FireBaseContext } from "./services/firebaseContect";
-import Firebase from "./services/firebase";
+// import Firebase from "./services/firebase";
+import FirebaseClass from "./services/firebase";
 
 const App = () => {
   const match = useRouteMatch("/");
   return (
-    <FireBaseContext.Provider value={new Firebase()}>
+    <FireBaseContext.Provider value={FirebaseClass}>
       <Switch>
         <Route path="/404" render={() => <h1>404 NotFound</h1>}/>
         <Route>
