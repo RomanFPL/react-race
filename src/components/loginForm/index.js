@@ -1,4 +1,5 @@
 import { useState } from "react";
+import s from "./style.module.css"
 
 const LoginForm = ({onSubmit}) => {
     
@@ -18,19 +19,33 @@ const LoginForm = ({onSubmit}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
+            <div className={s.root}>
                 <input 
-                    value={email}
                     type="text" 
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}/>
+                    className={s.input} 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    name="email" 
+                    autoComplete="off"
+                    required
+                />
+                <span className={s.highlight}></span>
+                <span className={s.bar}></span>
+                <label className={s.label}>Email</label>
             </div>
-            <div>
+            <div className={s.root}>
                 <input 
-                    value={password}
                     type="password" 
-                    name="password"
-                    onChange={(e) => setPassword(e.target.value)}/>
+                    className={s.input} 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    name="password" 
+                    autoComplete="off"
+                    required
+                />
+                <span className={s.highlight}></span>
+                <span className={s.bar}></span>
+                <label className={s.label}>Password</label>
             </div>
             <button>Login</button>
         </form>
