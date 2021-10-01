@@ -15,9 +15,20 @@ const MenuHeader = ({bgActive}) => {
         setOpenModal(prevState => !prevState);
     }
 
-    const handleSubmitLoginForm = (values) => {
-        console.log("### vl", values)
+    const handleSubmitLoginForm = async ({email, password}) => {
+        const requestOptions = {
+            method: "POST",
+            body: JSON.stringify({
+                email,
+                password,
+                returnSecureToken: true
+            })
+        }
+        const responce = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBdjsNGOzDGvt6VIdhRj1nmOBQvA_wMm9s', requestOptions).then(res => res.json());
+
+        console.log(responce);
     }
+
 
     return(
         <>
