@@ -41,6 +41,26 @@ const MenuHeader = ({bgActive}) => {
         console.log(response);
     }
 
+    const handleSubmitAuthForm = async ({email, password}) => {
+        const requestOptions = {
+            method: "POST",
+            body: JSON.stringify({
+                email,
+                password,
+                returnSecureToken: true
+            })
+        }
+        const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBdjsNGOzDGvt6VIdhRj1nmOBQvA_wMm9s', requestOptions).then(res => res.json());
+        if(response.hasOwnProperty("error")){
+            console.log("err")
+            NotificationManager.error(response.error.message, "Wrong!");
+        } else {
+            localStorage.setItem("idToken", response.idToken);
+            NotificationManager.success("Success message");
+        }
+        console.log(response);
+    }
+
 
     return(
         <>
@@ -56,7 +76,7 @@ const MenuHeader = ({bgActive}) => {
                 isOpen={isOpenModal}
                 onCloseModal={handleClickLogin}>
                 <LoginForm 
-                    onSubmit={handleSubmitLoginForm}
+                    onSubmit={isLogin ? handleSubmitAuthForm : handleSubmitLoginForm}
                     authTypeName={isLogin ? "SIGNIN" : "SIGNUP"}
                     authChangeTo={isLogin ? "Register?" : "Login?"}
                     changeAuth={handleChangeLogin}
