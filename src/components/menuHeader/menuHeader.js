@@ -8,12 +8,17 @@ import {NotificationManager} from 'react-notifications';
 const MenuHeader = ({bgActive}) => {
     const [menuState, setMenu] = useState(null);
     const [isOpenModal, setOpenModal] = useState(true);
+    const [isLogin, setLogin] = useState(true);
     const toggleMenuActive = () => {
         setMenu(!menuState);
     }
 
     const handleClickLogin = () => {
         setOpenModal(prevState => !prevState);
+    }
+
+    const handleChangeLogin = () => {
+        setLogin(prev => !prev);
     }
 
     const handleSubmitLoginForm = async ({email, password}) => {
@@ -47,11 +52,15 @@ const MenuHeader = ({bgActive}) => {
                 onClickLogin={handleClickLogin}
             />
             <Modal 
-                title="Log in ..."
+                title="Auth..."
                 isOpen={isOpenModal}
                 onCloseModal={handleClickLogin}>
                 <LoginForm 
-                    onSubmit={handleSubmitLoginForm}/>
+                    onSubmit={handleSubmitLoginForm}
+                    authTypeName={isLogin ? "SIGNIN" : "SIGNUP"}
+                    authChangeTo={isLogin ? "Register?" : "Login?"}
+                    changeAuth={handleChangeLogin}
+                    />
             </Modal>
             
        </> 

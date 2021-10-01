@@ -1,13 +1,12 @@
 import { useState } from "react";
 import s from "./style.module.css"
 
-const LoginForm = ({onSubmit}) => {
+const LoginForm = ({onSubmit, authTypeName, authChangeTo, changeAuth}) => {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
-        console.log(email);
         e.preventDefault();
         onSubmit && onSubmit({
             email,
@@ -47,7 +46,10 @@ const LoginForm = ({onSubmit}) => {
                 <span className={s.bar}></span>
                 <label className={s.label}>Password</label>
             </div>
-            <button>Login</button>
+            <div className={s.wrapBtn}>
+                <button>{authTypeName}</button>
+                <span onClick={changeAuth}>{authChangeTo}</span>
+            </div>
         </form>
     );
 };

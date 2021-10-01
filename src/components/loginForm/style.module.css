@@ -112,3 +112,22 @@
         background: transparent;
     }
 }
+
+.wrapBtn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.wrapBtn span {
+    font-size: 24px;
+    transition: ease-in-out .25s color;
+    color: black;
+    cursor: pointer;
+
+}
+
+.wrapBtn span:hover {
+    font-size: 24px;
+    color: #f300b4;
+}
