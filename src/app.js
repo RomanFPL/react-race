@@ -3,6 +3,8 @@ import HomePage from "./routes/homePage";
 import ContactPage from "./routes/contactPage";
 import { useRouteMatch, Route, Switch, Redirect } from "react-router-dom";
 import AboutPage from "./routes/aboutPage/aboutPage";
+import {NotificationContainer} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 import s from "./app.module.css"
 import cn from "classnames";
@@ -12,6 +14,7 @@ import MenuHeader from "./components/menuHeader";
 const App = () => {
   const match = useRouteMatch("/");
   return (
+    <>
       <Switch>
         <Route path="/404" render={() => <h1>404 NotFound</h1>}/>
         <Route>
@@ -31,6 +34,8 @@ const App = () => {
           </> 
         </Route>
       </Switch>
+    <NotificationContainer/>
+  </>
   )
 }
 

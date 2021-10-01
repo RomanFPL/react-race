@@ -3,6 +3,7 @@ import NavBar from "../navBar"
 import { useState } from "react"
 import Modal from "../modal";
 import LoginForm from "../loginForm";
+import {NotificationManager} from 'react-notifications';
 
 const MenuHeader = ({bgActive}) => {
     const [menuState, setMenu] = useState(null);
@@ -24,9 +25,14 @@ const MenuHeader = ({bgActive}) => {
                 returnSecureToken: true
             })
         }
-        const responce = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBdjsNGOzDGvt6VIdhRj1nmOBQvA_wMm9s', requestOptions).then(res => res.json());
-
-        console.log(responce);
+        const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBdjsNGOzDGvt6VIdhRj1nmOBQvA_wMm9s', requestOptions).then(res => res.json());
+        if(response.hasOwnProperty("error")){
+            console.log("err")
+            NotificationManager.error(response.error.message, "Wrong!");
+        } else {
+            NotificationManager.success("Success message");
+        }
+        console.log(response);
     }
 
 
