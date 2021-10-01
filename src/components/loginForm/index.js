@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "../input";
 import s from "./style.module.css"
 
 const LoginForm = ({onSubmit, authTypeName, authChangeTo, changeAuth}) => {
@@ -18,34 +19,19 @@ const LoginForm = ({onSubmit, authTypeName, authChangeTo, changeAuth}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className={s.root}>
-                <input 
-                    type="text" 
-                    className={s.input} 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    name="email" 
-                    autoComplete="off"
-                    required
-                />
-                <span className={s.highlight}></span>
-                <span className={s.bar}></span>
-                <label className={s.label}>Email</label>
-            </div>
-            <div className={s.root}>
-                <input 
-                    type="password" 
-                    className={s.input} 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    name="password" 
-                    autoComplete="off"
-                    required
-                />
-                <span className={s.highlight}></span>
-                <span className={s.bar}></span>
-                <label className={s.label}>Password</label>
-            </div>
+            <Input 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                label="Email"
+            />
+            <Input 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                label="Password"
+                type="password"
+            />
             <div className={s.wrapBtn}>
                 <button>{authTypeName}</button>
                 <span onClick={changeAuth}>{authChangeTo}</span>
