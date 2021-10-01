@@ -1,10 +1,11 @@
 import Menu from "../menu"
 import NavBar from "../navBar"
 import { useState } from "react"
+import Modal from "../modal";
 
 const MenuHeader = ({bgActive}) => {
     const [menuState, setMenu] = useState(null);
-    const [isOpenModal, setOpenModal] = useState(null);
+    const [isOpenModal, setOpenModal] = useState(false);
     const toggleMenuActive = () => {
         setMenu(!menuState);
     }
@@ -20,7 +21,15 @@ const MenuHeader = ({bgActive}) => {
                 menuActive={menuState} 
                 menuTriger={toggleMenuActive} 
                 bgActive={bgActive}
-                onClickLogin={handleClickLogin}/>
+                onClickLogin={handleClickLogin}
+            />
+            <Modal 
+                title="Log in ..."
+                isOpen={isOpenModal}
+                onCloseModal={handleClickLogin}>
+                Some text...
+            </Modal>
+            
        </> 
     )
 }
