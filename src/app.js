@@ -10,6 +10,7 @@ import s from "./app.module.css"
 import cn from "classnames";
 import Footer from "./components/footer";
 import MenuHeader from "./components/menuHeader";
+import PrivatRoute from "./components/privateRoute";
 
 const App = () => {
   const match = useRouteMatch("/");
@@ -24,8 +25,8 @@ const App = () => {
                 <Switch>
                   <Route path="/" exact component={HomePage}/>
                   <Route path="/home" component={HomePage}/>
-                  <Route path="/game" component={GamePage}/>
-                  <Route path="/about" component={AboutPage}/>
+                  <PrivatRoute path="/game" component={GamePage}/>
+                  <PrivatRoute path="/about" component={AboutPage}/>
                   <Route path="/contact" component={ContactPage}/>
                   <Route render={() => (<Redirect to="/404"/>)}/>
                 </Switch>

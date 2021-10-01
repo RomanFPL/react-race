@@ -30,6 +30,7 @@ const MenuHeader = ({bgActive}) => {
             console.log("err")
             NotificationManager.error(response.error.message, "Wrong!");
         } else {
+            localStorage.setItem("idToken", response.idToken);
             NotificationManager.success("Success message");
         }
         console.log(response);
