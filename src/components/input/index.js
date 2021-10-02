@@ -1,5 +1,5 @@
 import s from "./style.module.css"
-const Input = ({value, label, name, onChange, type = "text", required="true", autoComplete="off"}) => {
+const Input = ({value, label, name, onChange, type = "text", required, autoComplete="off"}) => {
     return (
         <div className={s.root}>
                 <input 
@@ -9,7 +9,7 @@ const Input = ({value, label, name, onChange, type = "text", required="true", au
                     onChange={onChange}
                     name={name} 
                     autoComplete={autoComplete}
-                    required={required}
+                    required={required ? 1 : 0}
                 />
                 <span className={s.highlight}></span>
                 <span className={s.bar}></span>

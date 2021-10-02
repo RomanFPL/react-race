@@ -8,7 +8,7 @@ import {NotificationManager} from 'react-notifications';
 
 const MenuHeader = ({bgActive}) => {
     const [menuState, setMenu] = useState(null);
-    const [isOpenModal, setOpenModal] = useState(true);
+    const [isOpenModal, setOpenModal] = useState(false);
     const [isLogin, setLogin] = useState(true);
 
     const dbLoginFetch = (httpsApi) => {
@@ -23,7 +23,6 @@ const MenuHeader = ({bgActive}) => {
             }
             const response = await fetch(httpsApi, requestOptions).then(res => res.json());
             if(response.hasOwnProperty("error")){
-                console.log("err")
                 NotificationManager.error(response.error.message, "Wrong!");
             } else {
                 localStorage.setItem("idToken", response.idToken);

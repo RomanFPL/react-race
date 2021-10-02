@@ -4,15 +4,21 @@
     justify-content: space-between;
 }
 
-.wrapBtn span {
-    font-size: 24px;
+.wrapBtn .btnChange {
+    font-size: 16px;
     transition: ease-in-out .25s color;
     color: black;
     cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    text-align: end;
+    text-transform: none;
+    font-style: italic;
 
 }
 
-.wrapBtn span:hover {
-    font-size: 24px;
+.wrapBtn .btnChange:hover {
+    font-size: 16px;
     color: #f300b4;
 }

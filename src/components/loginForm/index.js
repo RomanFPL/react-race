@@ -34,7 +34,7 @@ const LoginForm = ({onSubmit, authTypeName, authChangeTo, changeAuth}) => {
             />
             <div className={s.wrapBtn}>
                 <button>{authTypeName}</button>
-                <span onClick={changeAuth}>{authChangeTo}</span>
+                <button className={s.btnChange} type="button" onClick={changeAuth}>{authChangeTo}</button>
             </div>
         </form>
     );
