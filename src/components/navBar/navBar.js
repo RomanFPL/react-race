@@ -18,7 +18,7 @@ const NavBar = ({menuActive, menuTriger, bgActive, onClickLogin}) => {
             LOGO
             </p>
             <div className={s.loginAndMenu}>
-                {(isLoadingUser && !localId) && 
+                {(!isLoadingUser && !localId) && 
                     <div 
                     className={s.loginWrap}
                     onClick={onClickLogin}>

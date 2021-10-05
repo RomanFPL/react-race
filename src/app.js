@@ -12,16 +12,21 @@ import Footer from "./components/footer";
 import MenuHeader from "./components/menuHeader";
 import PrivatRoute from "./components/privateRoute";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getUserAsync } from "./store/user";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAsync, selectUserLoading } from "./store/user";
 
 const App = () => {
   const match = useRouteMatch("/");
   const dispatch = useDispatch();
+  const isUseLoading = useSelector(selectUserLoading);
 
   useEffect(() => {
     dispatch(getUserAsync());
   },[])
+  if(isUseLoading){
+    return "Loading ..."
+  }
+
   return (
     <>
       <Switch>
