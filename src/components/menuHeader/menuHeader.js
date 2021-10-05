@@ -4,12 +4,15 @@ import { useState } from "react"
 import Modal from "../modal";
 import LoginForm from "../loginForm";
 import {NotificationManager} from 'react-notifications';
+import { useDispatch } from "react-redux";
+import { getUserAsync, getUserUpdateAsync } from "../../store/user";
 
 
 const MenuHeader = ({bgActive}) => {
     const [menuState, setMenu] = useState(null);
     const [isOpenModal, setOpenModal] = useState(false);
     const [isLogin, setLogin] = useState(true);
+    const dispatch = useDispatch();
 
     const dbLoginFetch = (httpsApi) => {
         return async ({email, password}) => {
@@ -37,6 +40,7 @@ const MenuHeader = ({bgActive}) => {
                 }
                 localStorage.setItem("idToken", response.idToken);
                 NotificationManager.success("Success message");
+                dispatch(getUserUpdateAsync());
                 setOpenModal(false)
             }
         }
