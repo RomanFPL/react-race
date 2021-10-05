@@ -14,6 +14,7 @@ import PrivatRoute from "./components/privateRoute";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAsync, selectUserLoading } from "./store/user";
+import UserProfile from "./routes/userProfile";
 
 const App = () => {
   const match = useRouteMatch("/");
@@ -40,6 +41,7 @@ const App = () => {
                   <Route path="/home" component={HomePage}/>
                   <PrivatRoute path="/game" component={GamePage}/>
                   <PrivatRoute path="/about" component={AboutPage}/>
+                  <PrivatRoute path="/user" component={UserProfile}/>
                   <Route path="/contact" component={ContactPage}/>
                   <Route render={() => (<Redirect to="/404"/>)}/>
                 </Switch>

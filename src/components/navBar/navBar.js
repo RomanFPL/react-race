@@ -28,7 +28,7 @@ const NavBar = ({menuActive, menuTriger, bgActive, onClickLogin}) => {
                 {(!isLoadingUser && localId) && 
                     <Link 
                     className={s.loginWrap}
-                    to="/login">
+                    to="/user">
                         <UserSVG/>
                     </Link>
                 }

@@ -5,7 +5,7 @@ import Modal from "../modal";
 import LoginForm from "../loginForm";
 import {NotificationManager} from 'react-notifications';
 import { useDispatch } from "react-redux";
-import { getUserAsync, getUserUpdateAsync } from "../../store/user";
+import { getUserUpdateAsync } from "../../store/user";
 
 
 const MenuHeader = ({bgActive}) => {
