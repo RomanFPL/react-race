@@ -11,9 +11,17 @@ import cn from "classnames";
 import Footer from "./components/footer";
 import MenuHeader from "./components/menuHeader";
 import PrivatRoute from "./components/privateRoute";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getUserAsync } from "./store/user";
 
 const App = () => {
   const match = useRouteMatch("/");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserAsync());
+  },[])
   return (
     <>
       <Switch>
