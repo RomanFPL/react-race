@@ -39,10 +39,18 @@ class Firebase {
       this.database.ref(`pokemons/${key}`).set(pokemon);
     }
 
-    addPokemon = (data) => {
-      const newKey = this.database.ref().child('pokemons').push().key;
-      this.database.ref('pokemons/' + newKey).set(data);
+    addPokemon = async (localId, data) => {
+    const requestOptions = {
+      method: 'POST',
+      body: JSON.stringify(data),
+    } 
+     const res = await fetch(`https://pokemon-game-24b59.firebaseapp.com/${localId}/pokemons.json?auth=AIzaSyBdjsNGOzDGvt6VIdhRj1nmOBQvA_wMm9s`, requestOptions).then(res => res.json())
+    console.log(res);
     }
+    // addPokemon = (data) => {
+    //   const newKey = this.database.ref().child('pokemons').push().key;
+    //   this.database.ref('pokemons/' + newKey).set(data);
+    // }
   }
 
   const FirebaseClass = new Firebase();

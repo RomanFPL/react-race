@@ -6,6 +6,7 @@ import cn from "classnames";
 import { useState } from "react/cjs/react.development";
 import { useDispatch, useSelector } from "react-redux";
 import { clearGameState, selectGameStatus, selectPokemonsEnemies, selectPokemonsPlay, firebase } from "../../../../store/pokemon";
+import { selectUserID } from "../../../../store/user";
 
 const FinishPage = () => {
     const history = useHistory()
@@ -13,6 +14,7 @@ const FinishPage = () => {
     const pokemons = useSelector(selectPokemonsPlay);
     const pokemonsEnemy = useSelector(selectPokemonsEnemies);
     const playStatus = useSelector(selectGameStatus);
+    const curentUser = useSelector(selectUserID)
 
 
     const [selectedCard, setSelectedCard] = useState({})
@@ -20,7 +22,7 @@ const FinishPage = () => {
     
     const handleBtnClick = () => {
         if(playStatus && Object.values(selectedCard).length){
-            firebase.addPokemon({...selectedCard, selected: false});
+            firebase.addPokemon(curentUser, {...selectedCard, selected: false});
             history.replace("/game/");
             dispatch(clearGameState());
         } else if(!playStatus){
