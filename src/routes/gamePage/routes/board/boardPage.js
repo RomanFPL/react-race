@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import PlayerBoard from './components/PlayerBoard';
 import {selectPokemonsPlay, setGameStatus, setPokemonsEnemy } from '../../../../store/pokemon';
 import { useDispatch, useSelector } from 'react-redux';
+import request from '../../../../services/request';
 
 
 const counterWin = (board, player1, player2) => {
@@ -43,8 +44,7 @@ const BoardPage = () => {
 
     useEffect(() => {
         (async function () {
-            const boardResponse = await fetch("https://reactmarathon-api.netlify.app/api/board");
-            const boardRequest = await boardResponse.json();
+            const boardRequest = await request.getBoard();
             setBoard(boardRequest.data)
 
             const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
