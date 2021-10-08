@@ -25,11 +25,14 @@ const counterWin = (board, player1, player2) => {
 }
 
 
+
 const BoardPage = () => {
     const cards = useSelector(selectPokemonsPlay);
     const dispatch = useDispatch();
 
     const history = useHistory();
+    //Start
+    
     const [board, setBoard] = useState([])
     const [choiceCard, setChoiseCard] = useState(null)
     const [player2, setPlayer2] = useState([])
@@ -45,8 +48,9 @@ const BoardPage = () => {
     useEffect(() => {
         (async function () {
             const boardRequest = await request.getBoard();
-            setBoard(boardRequest.data)
+            setBoard(boardRequest.data);
 
+            
             const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
             const player2Requerst = await player2Response.json();
             dispatch(setPokemonsEnemy(player2Requerst.data))
@@ -84,6 +88,7 @@ const BoardPage = () => {
             setPlayer1(prev => prev.filter(item => item.id !== choiceCard.id))
         }
         
+
         if(choiceCard.player === 2) {
             setPlayer2(prev => prev.filter(item => item.id !== choiceCard.id))
         }
