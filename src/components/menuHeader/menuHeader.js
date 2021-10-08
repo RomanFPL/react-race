@@ -4,12 +4,15 @@ import { useState } from "react"
 import Modal from "../modal";
 import LoginForm from "../loginForm";
 import {NotificationManager} from 'react-notifications';
+import { useDispatch } from "react-redux";
+import { getUserUpdateAsync } from "../../store/user";
 
 
 const MenuHeader = ({bgActive}) => {
     const [menuState, setMenu] = useState(null);
     const [isOpenModal, setOpenModal] = useState(false);
     const [isLogin, setLogin] = useState(true);
+    const dispatch = useDispatch();
 
     const dbLoginFetch = (httpsApi) => {
         return async ({email, password}) => {
@@ -25,8 +28,19 @@ const MenuHeader = ({bgActive}) => {
             if(response.hasOwnProperty("error")){
                 NotificationManager.error(response.error.message, "Wrong!");
             } else {
+                if(!isLogin){
+                    const pokemonsStart = await fetch("https://reactmarathon-api.herokuapp.com/api/pokemons/starter").then(res => res.json());
+                    console.log("pokemonStart", pokemonsStart);
+                    for(const item of pokemonsStart.data){
+                        await fetch(`https://pokemon-game-24b59-default-rtdb.asia-southeast1.firebasedatabase.app/${response.localId}/pokemons.json?auth=${response.idToken}`,{
+                            method:'POST',
+                            body: JSON.stringify(item)
+                        })
+                    }
+                }
                 localStorage.setItem("idToken", response.idToken);
                 NotificationManager.success("Success message");
+                dispatch(getUserUpdateAsync());
                 setOpenModal(false)
             }
         }

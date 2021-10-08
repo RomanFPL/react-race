@@ -1,0 +1,23 @@
+.sectionCenter{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    height: 50vh;
+    width: 100%;
+}
+
+.userPanel{
+    min-width: 300px;
+}
+
+.userPanel table {
+    width: 100%;
+    font-size: 20px;
+}
+
+.userPanel table tr td:first-child{
+    text-align: left;
+}
+.userPanel table tr td:last-child{
+    width: 300px;
+}

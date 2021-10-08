@@ -11,9 +11,23 @@ import cn from "classnames";
 import Footer from "./components/footer";
 import MenuHeader from "./components/menuHeader";
 import PrivatRoute from "./components/privateRoute";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAsync, selectUserLoading } from "./store/user";
+import UserProfile from "./routes/userProfile";
 
 const App = () => {
   const match = useRouteMatch("/");
+  const dispatch = useDispatch();
+  const isUseLoading = useSelector(selectUserLoading);
+
+  useEffect(() => {
+    dispatch(getUserAsync());
+  },[])
+  if(isUseLoading){
+    return "Loading ..."
+  }
+
   return (
     <>
       <Switch>
@@ -27,6 +41,7 @@ const App = () => {
                   <Route path="/home" component={HomePage}/>
                   <PrivatRoute path="/game" component={GamePage}/>
                   <PrivatRoute path="/about" component={AboutPage}/>
+                  <PrivatRoute path="/user" component={UserProfile}/>
                   <Route path="/contact" component={ContactPage}/>
                   <Route render={() => (<Redirect to="/404"/>)}/>
                 </Switch>
