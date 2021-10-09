@@ -111,18 +111,21 @@ const BoardPage = () => {
             if(game.move !== null){
                 const idAi = game.move.poke.id;
 
-                setPlayer2(prevState => prevState.map(item => {
-                    if(item.id === idAi){
-                        setEnemySelect(item.id)
-                        return {
-                            ...item,
-                            isActive: true
+                setTimeout(() => {
+                    setPlayer2(prevState => prevState.map(item => {
+                        if(item.id === idAi){
+                            setEnemySelect(item.id)
+                            return {
+                                ...item,
+                                isActive: true
+                            }
                         }
-                    }
-                    return item;
-                }));
-
-                setPlayer2(() => game.hands.p2.pokes.map(item => item.poke));
+                        return item;
+                    }));
+                }, 1000);
+                setTimeout(()=>{
+                    setPlayer2(() => game.hands.p2.pokes.map(item => item.poke));
+                },1500);
             }
 
 
