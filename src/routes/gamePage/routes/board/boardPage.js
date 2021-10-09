@@ -50,9 +50,10 @@ const BoardPage = () => {
             const boardRequest = await request.getBoard();
             setBoard(boardRequest.data);
 
+            const player2Requerst = await request.gameStart({
+                pokemons: Object.values(cards)
+            })
             
-            const player2Response = await fetch("https://reactmarathon-api.netlify.app/api/create-player");
-            const player2Requerst = await player2Response.json();
             dispatch(setPokemonsEnemy(player2Requerst.data))
             setPlayer2(() => {
                 return player2Requerst.data.map(item => ({
