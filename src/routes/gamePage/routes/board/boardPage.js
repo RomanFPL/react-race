@@ -120,7 +120,9 @@ const BoardPage = () => {
                         }
                     }
                     return item;
-                }))
+                }));
+
+                setPlayer2(() => game.hands.p2.pokes.map(item => item.poke));
             }
 
 
