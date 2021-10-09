@@ -60,6 +60,7 @@ const BoardPage = () => {
     const [steps, setSteps] = useState(0);
     const [serverBoard, setServerBoard] = useState([0,0,0, 0,0,0, 0,0,0]);
     const [enemySelect, setEnemySelect] = useState(null);
+    const [enemyMoveFirst, setEnemyMoveFirst] = useState(true);
     
     const enemyFirst = async () => {
         const params = {
@@ -78,7 +79,7 @@ const BoardPage = () => {
                 const count = prev + 1;
                 return count;
             })
-            
+
         if(game.move !== null){
             const idAi = game.move.poke.id;
                 setTimeout(() => {
@@ -120,17 +121,17 @@ const BoardPage = () => {
                 }))
             })
 
-            if(board.every(item => item.card === null)){
-                const firstTurn = ['p1','p2'][Math.round(Math.random())];
-                alert(firstTurn === 'p1' ? "Your muve is first!" : "AI maves first!");
-                setTimeout(()=>{
-                    if(firstTurn === 'p2'){
-                        enemyFirst();
-                    }
-                }, 500)
-            }
         })()
     }, [])
+
+    useEffect(() => {
+        if(player2.length !==0 && enemyMoveFirst){
+            setEnemyMoveFirst(Math.round(Math.random()));
+            alert(!enemyMoveFirst ? "Your muve is first!" : "AI maves first!");
+            enemyFirst();
+            setEnemyMoveFirst(false);
+            }
+    }, [player2])
 
     if(Object.keys(cards).length === 0){
         history.replace("/game");
