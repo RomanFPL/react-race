@@ -4,14 +4,16 @@ import s from "./style.module.css"
 import { useState } from "react";
 import cn from "classnames";
 
-const PlayerBoard = ({player, cards, onClickCard}) => {
+const PlayerBoard = ({player, cards, onClickCard, enemySelect}) => {
     const [isSelected, setSelected] = useState(null)
 
     return (
     <>
         {cards.map((item) => (
             <div key={item.id} className={cn(s.cardBoard, {
-                [s.selected]: isSelected === item.id
+                [s.selected]: isSelected === item.id},
+            {
+                [s.selected]: enemySelect === item.id
             })}
             onClick={
                 () => {setSelected(item.id)

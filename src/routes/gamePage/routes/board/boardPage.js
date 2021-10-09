@@ -31,7 +31,6 @@ const BoardPage = () => {
     const dispatch = useDispatch();
 
     const history = useHistory();
-    //Start
     
     const [board, setBoard] = useState([])
     const [choiceCard, setChoiseCard] = useState(null)
@@ -44,6 +43,7 @@ const BoardPage = () => {
     })
     const [steps, setSteps] = useState(0);
     const [serverBoard, setServerBoard] = useState([0,0,0, 0,0,0, 0,0,0])
+    const [enemySelect, setEnemySelect] = useState(null)
 
     useEffect(() => {
         (async function () {
@@ -103,6 +103,25 @@ const BoardPage = () => {
         const game = await request.game(params);
         console.log(game)
 
+        setSteps(prev => {
+                const count = prev + 1;
+                return count;
+            })
+        
+            if(game.move !== null){
+                const idAi = game.move.poke.id;
+
+                setPlayer2(prevState => prevState.map(item => {
+                    if(item.id === idAi){
+                        setEnemySelect(item.id)
+                        return {
+                            ...item,
+                            isActive: true
+                        }
+                    }
+                    return item;
+                }))
+            }
 
 
         // if(choiceCard) {
@@ -183,6 +202,7 @@ const BoardPage = () => {
                 player={2}
                 cards={player2}
                 onClickCard={(card) => setChoiseCard(card)}
+                enemySelect={enemySelect}
                 />
             </div>
         </div>
