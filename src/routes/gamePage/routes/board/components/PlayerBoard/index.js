@@ -23,7 +23,7 @@ const PlayerBoard = ({player, cards, onClickCard, enemySelect}) => {
                 }
         }
             >
-                <PokemonCard 
+                <PokemonCard
                     type={item.type} 
                     values={item.values} 
                     img={item.img} 

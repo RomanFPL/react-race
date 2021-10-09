@@ -34,7 +34,7 @@ const returnBoard = (board) => {
             }
         }
         return {
-            possession: index +1, 
+            position: index +1, 
             card 
         }
     })
@@ -117,7 +117,9 @@ const BoardPage = () => {
         }));
 
         const game = await request.game(params);
-        console.log(game)
+        console.log(game);
+
+        setBoard(returnBoard(game.oldBoard))
 
         setSteps(prev => {
                 const count = prev + 1;
@@ -131,10 +133,6 @@ const BoardPage = () => {
                     setPlayer2(prevState => prevState.map(item => {
                         if(item.id === idAi){
                             setEnemySelect(item.id)
-                            return {
-                                ...item,
-                                isActive: true
-                            }
                         }
                         return item;
                     }));
@@ -143,42 +141,12 @@ const BoardPage = () => {
                     setPlayer2(() => game.hands.p2.pokes.map(item => item.poke));
                     setServerBoard(game.board);
                     setBoard(returnBoard(game.board));
+                    setSteps(prev => {
+                        const count = prev + 1;
+                        return count;
+                    })
                 },1500);
             }
-
-
-        // if(choiceCard) {
-        //     const params = {
-        //         position,
-        //         card: choiceCard,
-        //         board
-        //     };
-        //     const res = await fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(params),
-        // });
-
-        // const request = await res.json();
-        
-        // if(choiceCard.player === 1) {
-        //     setPlayer1(prev => prev.filter(item => item.id !== choiceCard.id))
-        // }
-        
-
-        // if(choiceCard.player === 2) {
-        //     setPlayer2(prev => prev.filter(item => item.id !== choiceCard.id))
-        // }
-        
-        // setBoard(request.data);
-
-        // setSteps(prev => {
-        //     const count = prev + 1;
-        //     return count;
-        // })
-
         }
     }
 
