@@ -24,6 +24,22 @@ const counterWin = (board, player1, player2) => {
     return [player1Count, player2Count];
 }
 
+const returnBoard = (board) => {
+    return board.map((item, index) => {
+        let card = null;
+        if(typeof item === 'object'){
+            card = {
+                ...item.poke,
+                possession: item.holder === 'p1' ? 'blue' : 'red'
+            }
+        }
+        return {
+            possession: index +1, 
+            card 
+        }
+    })
+}
+
 
 
 const BoardPage = () => {
@@ -125,6 +141,8 @@ const BoardPage = () => {
                 }, 1000);
                 setTimeout(()=>{
                     setPlayer2(() => game.hands.p2.pokes.map(item => item.poke));
+                    setServerBoard(game.board);
+                    setBoard(returnBoard(game.board));
                 },1500);
             }
 
