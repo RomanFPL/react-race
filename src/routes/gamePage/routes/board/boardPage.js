@@ -58,14 +58,56 @@ const BoardPage = () => {
         }))
     })
     const [steps, setSteps] = useState(0);
-    const [serverBoard, setServerBoard] = useState([0,0,0, 0,0,0, 0,0,0])
-    const [enemySelect, setEnemySelect] = useState(null)
+    const [serverBoard, setServerBoard] = useState([0,0,0, 0,0,0, 0,0,0]);
+    const [enemySelect, setEnemySelect] = useState(null);
+    
+    const enemyFirst = async () => {
+        const params = {
+            currentPlayer: 'p2',
+            hands: {
+              p1: player1,
+              p2: player2
+            },
+            move: null,
+            board: serverBoard
+          };
+
+        const game = await request.game(params);  
+
+        setSteps(prev => {
+                const count = prev + 1;
+                return count;
+            })
+            
+        if(game.move !== null){
+            const idAi = game.move.poke.id;
+                setTimeout(() => {
+                    setPlayer2(prevState => prevState.map(item => {
+                        if(item.id === idAi){
+                            setEnemySelect(item.id)
+                        }
+                        return item;
+                    }));
+                }, 1000);
+                    setTimeout(()=>{
+                        setPlayer2(() => game.hands.p2.pokes.map(item => item.poke));
+                        setServerBoard(game.board);
+                        setBoard(returnBoard(game.board));
+                        setSteps(prev => {
+                            const count = prev + 1;
+                            return count;
+                        })
+                    },1500);
+        }
+
+        // }
+    }
 
     useEffect(() => {
         (async function () {
             const boardRequest = await request.getBoard();
             setBoard(boardRequest.data);
-
+            
             const player2Requerst = await request.gameStart({
                 pokemons: Object.values(cards)
             })
@@ -77,12 +119,23 @@ const BoardPage = () => {
                     possession: 'red'
                 }))
             })
-            })()
+
+            if(board.every(item => item.card === null)){
+                const firstTurn = ['p1','p2'][Math.round(Math.random())];
+                alert(firstTurn === 'p1' ? "Your muve is first!" : "AI maves first!");
+                setTimeout(()=>{
+                    if(firstTurn === 'p2'){
+                        enemyFirst();
+                    }
+                }, 500)
+            }
+        })()
     }, [])
 
     if(Object.keys(cards).length === 0){
         history.replace("/game");
     }
+    
 
     const handleClickBoardPlate = async (position) => {
         if(typeof choiceCard === 'object') {
@@ -192,7 +245,6 @@ const BoardPage = () => {
                 <PlayerBoard 
                 player={2}
                 cards={player2}
-                onClickCard={(card) => setChoiseCard(card)}
                 enemySelect={enemySelect}
                 />
             </div>

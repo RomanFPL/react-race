@@ -16,10 +16,13 @@ const PlayerBoard = ({player, cards, onClickCard, enemySelect}) => {
                 [s.selected]: enemySelect === item.id
             })}
             onClick={
-                () => {setSelected(item.id)
-                    onClickCard && onClickCard({
-                        ...item, player
-                    })
+                () => {
+                    if(player === 1){
+                        setSelected(item.id);
+                        onClickCard && onClickCard({
+                            ...item, player
+                        })
+                    }
                 }
         }
             >
