@@ -43,7 +43,7 @@ const BoardPage = () => {
         }))
     })
     const [steps, setSteps] = useState(0);
-
+    const [serverBoard, setServerBoard] = useState([0,0,0, 0,0,0, 0,0,0])
 
     useEffect(() => {
         (async function () {
@@ -69,37 +69,73 @@ const BoardPage = () => {
     }
 
     const handleClickBoardPlate = async (position) => {
-        if(choiceCard) {
+        if(typeof choiceCard === 'object') {
             const params = {
-                position,
-                card: choiceCard,
-                board
+                currentPlayer: 'p1',
+                hands: {
+                    p1: player1,
+                    p2: player2
+                },
+                move: {
+                    poke: {
+                        ...choiceCard
+                    },
+                position
+                },
+                board: serverBoard
             };
-            const res = await fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(params),
-        });
 
-        const request = await res.json();
-        
-        if(choiceCard.player === 1) {
-            setPlayer1(prev => prev.filter(item => item.id !== choiceCard.id))
+        if(choiceCard.player === 1){
+            setPlayer1(prevState => prevState.filter(item => item.id !== choiceCard.id))
         }
+
+        setBoard(prevState => prevState.map(item => {
+            if(item.position === position){
+                return {
+                    ...item, 
+                    card: choiceCard
+                }
+            }
+
+            return item;
+        }));
+
+        const game = await request.game(params);
+        console.log(game)
+
+
+
+        // if(choiceCard) {
+        //     const params = {
+        //         position,
+        //         card: choiceCard,
+        //         board
+        //     };
+        //     const res = await fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(params),
+        // });
+
+        // const request = await res.json();
+        
+        // if(choiceCard.player === 1) {
+        //     setPlayer1(prev => prev.filter(item => item.id !== choiceCard.id))
+        // }
         
 
-        if(choiceCard.player === 2) {
-            setPlayer2(prev => prev.filter(item => item.id !== choiceCard.id))
-        }
+        // if(choiceCard.player === 2) {
+        //     setPlayer2(prev => prev.filter(item => item.id !== choiceCard.id))
+        // }
         
-        setBoard(request.data);
+        // setBoard(request.data);
 
-        setSteps(prev => {
-            const count = prev + 1;
-            return count;
-        })
+        // setSteps(prev => {
+        //     const count = prev + 1;
+        //     return count;
+        // })
 
         }
     }
